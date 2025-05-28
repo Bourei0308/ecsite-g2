@@ -1,75 +1,88 @@
 package com.example.demo.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Chat;
+import com.example.demo.user.SiteUser;
 
 @Repository
 public class Dao {
-	private final JdbcTemplate db;
-	public Dao(JdbcTemplate db) {
-		this.db=db;
-	}
-	
-	public void insert(Chat chat) {
-		String sql = "INSERT INTO chat(name,content) VALUES(?,?)";
-		db.update(sql,chat.getName(),chat.getContent());
-	}
-	
-	public void delete(int ID) {
-		String sql = "DELETE FROM chat WHERE ID = ?";
-		System.out.println(sql);
-		db.update(sql,ID);
-	}
-	
-	public List<Chat> select(String[] sqls) {
-		String sql = makeSQL(sqls);
-		RowMapper<Chat> mapper = (rs,a) -> new Chat(
-			rs.getInt("ID"),
-			rs.getString("name"),
-			rs.getString("content").replace("\n", "<br>"),
-			rs.getString("date")
-		);
-		
-		int size = Integer.parseInt(sqls[3]);
-		int page = Integer.parseInt(sqls[4]);
-		
-		int offset = size*(page-1);
-		
-		sql +="LIMIT "+ size +" OFFSET "+offset;
-		
-		System.out.println(sql);
-		
-		return db.query(sql,mapper);
-	}
-	
-	public void update(int ID,String field,String value) {	    
-	    String sql = "UPDATE chat SET " + field + " = ? WHERE id = ?";
+    private final JdbcTemplate db;
+
+    public Dao(JdbcTemplate db) {
+        this.db = db;
+    }
+
+    // SiteUser を登録する
+    public void insertUser(SiteUser su) {
+        String sql = "INSERT INTO SiteUser (password, nickName, adminFlag, deleteFlag, email, created_at, login_at, phone_number) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        db.update(sql,
+            su.getPassword(),
+            su.getNickName(),
+            su.getAdminFlag(),
+            su.getDeleteFlag(),
+            su.getEmail(),
+            su.getCreated_at(),
+            su.getLogin_at(),
+            su.getPhone_number()
+        );
+    }
+
+    // SiteUser を取得する（例：id による単一取得）
+    public SiteUser getUserById(int id) {
+        String sql = "SELECT * FROM SiteUser WHERE id = ?";
+        return db.queryForObject(sql, new SiteUserRowMapper(), id);
+    }
+
+    // SiteUser 一覧取得
+    public List<SiteUser> getAllUsers() {
+        String sql = "SELECT * FROM SiteUser";
+        return db.query(sql, new SiteUserRowMapper());
+    }
+
+    // SiteUser 削除
+    public void deleteUserById(int id) {
+        String sql = "DELETE FROM SiteUser WHERE id = ?";
+        db.update(sql, id);
+    }
+
+    // SiteUser の更新
+    public void updateUser(int ID,String field,String value) {	    
+	    String sql = "UPDATE SiteUser SET " + field + " = ? WHERE id = ?";
 	    db.update(sql, value, ID);
 	}
-	
-	public Chat get(int ID) {
-		String sql = "SELECT * FROM chat WHERE ID = ?";
-		RowMapper<Chat> mapper = (rs,a) -> new Chat(
-				rs.getInt("ID"),
-				rs.getString("name"),
-				rs.getString("content"),
-				rs.getString("date")
-			);
-		return db.queryForObject(sql, mapper, ID);
-	}
-	
-	public int count(String[] sqls) {
-		String sql = "SELECT COUNT(*) FROM (" + makeSQL(sqls) + ") AS sub";
+
+    // RowMapper クラス
+    private static class SiteUserRowMapper implements RowMapper<SiteUser> {
+        @Override
+        public SiteUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+            SiteUser user = new SiteUser();
+            user.setId(rs.getInt("id"));
+            user.setPassword(rs.getString("password"));
+            user.setNickName(rs.getString("nickName"));
+            user.setAdminFlag(rs.getBoolean("adminFlag"));
+            user.setDeleteFlag(rs.getBoolean("deleteFlag"));
+            user.setEmail(rs.getString("email"));
+            user.setCreated_at(rs.getTimestamp("created_at"));
+            user.setLogin_at(rs.getTimestamp("login_at"));
+            user.setPhone_number(rs.getString("phone_number"));
+            return user;
+        }
+    }
+    
+    public int count() {
+		String sql = "SELECT COUNT(*) FROM (SELECT * FROM SiteUser) AS sub";
 		return db.queryForObject(sql, Integer.class);
 	}
 	
 	public String makeSQL(String[] sqls) {
-		String sql = "SELECT * FROM chat ";
+		String sql = "SELECT * FROM SiteUser ";
 		
 		String contentRQ="";
 		String sdRQ="";
