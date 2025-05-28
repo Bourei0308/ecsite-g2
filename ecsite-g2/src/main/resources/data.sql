@@ -1,1 +1,1 @@
-INSERT INTO User (name) VALUES ('Taro');
+INSERT INTO SiteUser (name) VALUES ('Taro');
