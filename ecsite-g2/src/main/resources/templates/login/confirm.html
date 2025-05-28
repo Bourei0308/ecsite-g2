@@ -6,11 +6,15 @@
 	 </head>
  
 	 <body>
-		<h2>顧客ログイン画面</h2>
+		<h2>確認画面</h2>
 		
+		
+		<form action="#" method="get" th:action="@{/complete}">
+			<input type="submit" value="完了画面">
+		</form>
 		
 		<form action="#" method="get" th:action="@{/signIn}">
-			<input type="submit" value="ユーザー登録入力画面">
+			<input type="submit" value="戻る">
 		</form>
 	
 	 </body>
