@@ -1,6 +1,9 @@
+DROP TABLE SiteUser;
+DROP TABLE SiteUserInfo;
+
 CREATE TABLE IF NOT EXISTS SiteUser(
     ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-    pw VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     nickName VARCHAR(100) NOT NULL,
     adminFlag BOOLEAN NOT NULL COMMENT '0 or 1',
     deleteFlag BOOLEAN NOT NULL COMMENT '0 or 1',
@@ -18,7 +21,7 @@ CREATE TABLE IF NOT EXISTS SiteUserInfo(
 	address2 VARCHAR(100) NOT NULL,
 	address3 VARCHAR(100) NOT NULL,
 	address4 VARCHAR(100),
-	creditNumber INTEGER,
+	creditNumber VARCHAR(100),
 	birthday DATE,
 	firstName1 VARCHAR(100) NOT NULL,
 	lastName1 VARCHAR(100) NOT NULL,

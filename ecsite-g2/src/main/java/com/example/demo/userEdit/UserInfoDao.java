@@ -1,0 +1,88 @@
+package com.example.demo.userEdit;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.user.SiteUserInfo;
+
+@Repository
+public class UserInfoDao {
+
+    private final JdbcTemplate jdbc;
+
+    public UserInfoDao(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
+
+    // 追加
+    public void insert(SiteUserInfo info) {
+        String sql = "INSERT INTO SiteUserInfo (ID, gender, postNumber, address1, address2, address3, address4, creditNumber, birthday, firstName1, lastName1, firstName2, lastName2) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbc.update(sql,
+            info.getID(),
+            info.getGender(),
+            info.getPostNumber(),
+            info.getAddress1(),
+            info.getAddress2(),
+            info.getAddress3(),
+            info.getAddress4(),
+            info.getCreditNumber(),
+            info.getBirthday(),
+            info.getFirstName1(),
+            info.getLastName1(),
+            info.getFirstName2(),
+            info.getLastName2()
+        );
+    }
+
+    // 取得
+    public SiteUserInfo getById(int id) {
+        String sql = "SELECT * FROM SiteUserInfo WHERE ID = ?";
+        return jdbc.queryForObject(sql, mapper, id);
+    }
+
+    // 更新
+    public void update(int ID,String field,String value) {	    
+	    String sql = "UPDATE SiteUserInfo SET " + field + " = ? WHERE id = ?";
+	    jdbc.update(sql, value, ID);
+	}
+
+    // 削除
+    public void delete(int id) {
+        String sql = "DELETE FROM SiteUserInfo WHERE ID = ?";
+        jdbc.update(sql, id);
+    }
+
+    // 全件取得
+    public List<SiteUserInfo> getAll() {
+        String sql = "SELECT * FROM SiteUserInfo";
+        return jdbc.query(sql, mapper);
+    }
+
+    // 共通RowMapper
+    private final RowMapper<SiteUserInfo> mapper = new RowMapper<SiteUserInfo>() {
+        @Override
+        public SiteUserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            SiteUserInfo info = new SiteUserInfo();
+            info.setID(rs.getInt("ID"));
+            info.setGender(rs.getString("gender"));
+            info.setPostNumber(rs.getInt("postNumber"));
+            info.setAddress1(rs.getString("address1"));
+            info.setAddress2(rs.getString("address2"));
+            info.setAddress3(rs.getString("address3"));
+            info.setAddress4(rs.getString("address4"));
+            info.setCreditNumber(rs.getInt("creditNumber"));
+            info.setBirthday(rs.getString("birthday")); // 型注意：必要なら java.sql.Date に変えてください
+            info.setFirstName1(rs.getString("firstName1"));
+            info.setLastName1(rs.getString("lastName1"));
+            info.setFirstName2(rs.getString("firstName2"));
+            info.setLastName2(rs.getString("lastName2"));
+            return info;
+        }
+    };
+}
