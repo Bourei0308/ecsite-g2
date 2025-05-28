@@ -118,4 +118,13 @@ public class Dao {
 		return users.isEmpty() ? null : users.get(0);
 	}
 
+	public SiteUser findUserByNickAndPassword(String nickName, String password) {
+		String sql = "SELECT * FROM SiteUser WHERE nickName = ? AND password = ?";
+		try {
+			return db.queryForObject(sql, new SiteUserRowMapper(), nickName, password);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }
