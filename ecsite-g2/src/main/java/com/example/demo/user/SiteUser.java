@@ -2,12 +2,25 @@ package com.example.demo.user;
 
 import java.sql.Timestamp;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class SiteUser {
 
 	private Integer ID;
+
+	@NotBlank(message = "パスワードは必須項目です。")
+	@Size(max = 100, message = "パスワードは100文字以内で入力してください。")
 	private String password;
+
+	@NotBlank(message = "ニックネームは必須項目です。")
+	@Size(max = 100, message = "ニックネームは100文字以内で入力してください。")
 	private String nickName;
+
+	@NotNull(message = "管理者フラグは必須項目です。")
 	private Boolean adminFlag;
+
 	private Boolean deleteFlag;
 	private String email;
 	private Timestamp created_at;
