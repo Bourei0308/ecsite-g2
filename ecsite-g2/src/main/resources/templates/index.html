@@ -8,10 +8,17 @@
 	 <body>
 		<h2>顧客ログイン画面</h2>
 		
+		<!-- エラーメッセージ表示 -->
+		<div th:if="${error}" style="color: red;">
+		    <p th:text="${error}"></p>
+		</div>
+
 		
-		<form method="get" th:action="@{/signInUser}" th:object="${su}">
-			<p>電話番号：<input type="text" th:field="*{phone_number}"></p>
-			<p>パスワード：<input type="text" th:field="*{password}"></p>
+		
+		<form method="post" th:action="@{/login}" th:object="${su}">
+			<div>携帯電話番号またはEメールアドレスを入力</div>
+			<p>アカウント<br><input type="text" th:field="*{phone_number}"></p>
+			<p>パスワード<br><input type="password" th:field="*{password}"></p>
 			<input type="submit" value="ログイン">
 		</form>
 		

@@ -109,4 +109,13 @@ public class Dao {
 		sql = sql + contentRQ + sdRQ + edRQ;
 		return sql;
 	}
+
+	//ログインチェック
+	public SiteUser findUserByPhoneOrEmailAndPassword(String account, String password) {
+		String sql = "SELECT * FROM SiteUser WHERE (phone_number = ? OR email = ?) AND password = ?";
+
+		List<SiteUser> users = db.query(sql, new SiteUserRowMapper(), account, account, password);
+		return users.isEmpty() ? null : users.get(0);
+	}
+
 }
