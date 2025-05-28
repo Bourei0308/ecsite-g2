@@ -16,6 +16,7 @@ body {
 	position: fixed;
 	width: 100%;
 	top: 0;
+	z-index: 100;
   }
 
   .sidebar_btn {
@@ -46,6 +47,26 @@ body {
 
   .sidebar.active {
     left: 0; /* 显示状态 */
+  }
+  
+  .input-warning {
+    position: absolute;
+	top: -0.5em;
+	    left: 150px;
+    background: #fff;
+    border: 1px solid #000;
+    padding: 2px 6px;
+    font-size: small;
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateY(-10px);  /* 初始状态下稍微往下 */
+    transition: all 0.3s ease;   /* 平滑过渡 */
+    z-index: 10;
+    pointer-events: none;        /* 防止点击干扰 */
+  }
+  .input-warning.show {
+    opacity: 1;
+    transform: translateY(-20px);    /* 出现时上移至原位 */
   }
 
   /* 遮罩层 */
@@ -126,6 +147,7 @@ body {
       .info-item {
         margin: 5px 0;
         display: flex;
+		position: relative;
       }
       .info-label {
         width: 150px;

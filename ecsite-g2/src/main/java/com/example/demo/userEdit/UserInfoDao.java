@@ -48,10 +48,40 @@ public class UserInfoDao {
     }
 
     // 更新
-    public void update(int ID,String field,String value) {	    
-	    String sql = "UPDATE SiteUserInfo SET " + field + " = ? WHERE id = ?";
-	    jdbc.update(sql, value, ID);
-	}
+ // 更新整个对象（ID必须存在）
+    public void update(SiteUserInfo info) {
+        String sql = "UPDATE SiteUserInfo SET " +
+                "gender = ?, " +
+                "postNumber = ?, " +
+                "address1 = ?, " +
+                "address2 = ?, " +
+                "address3 = ?, " +
+                "address4 = ?, " +
+                "creditNumber = ?, " +
+                "birthday = ?, " +
+                "firstName1 = ?, " +
+                "lastName1 = ?, " +
+                "firstName2 = ?, " +
+                "lastName2 = ? " +
+                "WHERE ID = ?";
+
+        jdbc.update(sql,
+            info.getGender(),
+            info.getPostNumber(),
+            info.getAddress1(),
+            info.getAddress2(),
+            info.getAddress3(),
+            info.getAddress4(),
+            info.getCreditNumber(),
+            info.getBirthday(),
+            info.getFirstName1(),
+            info.getLastName1(),
+            info.getFirstName2(),
+            info.getLastName2(),
+            info.getID()
+        );
+    }
+
 
     // 削除
     public void delete(int id) {

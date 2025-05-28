@@ -4,7 +4,10 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.Dao;
 import com.example.demo.user.SiteUser;
@@ -41,7 +44,50 @@ public class UserEditController {
 			Model model,SiteUser su,SiteUserInfo info,HttpSession session) {
 		su = (SiteUser)session.getAttribute("su");
 		info = (SiteUserInfo)session.getAttribute("info");
+		
+		if(su==null||info==null) {
+			return "redirect:/mypage";
+		}
+		
+		// 放入 model
+	    model.addAttribute("su", su);
+	    model.addAttribute("info", info);
 
 		return "useredit";
 	}
+	
+	@PostMapping("/mypage/update")
+	public String update(
+	        @RequestParam("nickName") String nickName,
+	        
+	        @RequestParam("postNumber1") String postNumber1,
+	        @RequestParam("postNumber2") String postNumber2,
+	        
+	        @RequestParam("creditNumber1") String creditNumber1,
+	        @RequestParam("creditNumber2") String creditNumber2,
+	        @RequestParam("creditNumber3") String creditNumber3,
+	        @RequestParam("creditNumber4") String creditNumber4,
+	        
+	        @ModelAttribute SiteUserInfo info,
+	        HttpSession session) {
+
+        // 假设 session 中保存了当前登录用户
+        SiteUser su = (SiteUser) session.getAttribute("su");
+        if (su == null) {
+            return "redirect:/mypage"; // 未登录跳转登录页
+        }
+
+        // 更新 SiteUser
+        db.updateUser(su.getID(), "nickName", nickName);
+
+        // 设定 ID 给 info
+        info.setID(su.getID());
+        info.setPostNumber(Integer.parseInt(postNumber1+postNumber2));
+        info.setCreditNumber(creditNumber1+creditNumber2+creditNumber3+creditNumber4);
+
+        // 保存 SiteUserInfo
+        infodb.update(info);
+
+        return "redirect:/mypage"; // 更新后跳转个人主页
+    }
 }

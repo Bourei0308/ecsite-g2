@@ -14,94 +14,106 @@
 	</header>
 	
 	<main>
-	    <!-- 基本情報 -->
-	    <div class="section">
-	      <div class="section-title">基本情報</div>
-		  
-		  <div class="info-item">
-  	        <div class="info-label">ネーム</div>
-  	        <input type="text" id="nickName" name="nickName" th:value="${su.nickName}">
-  	      </div>
-				  
-		  <div class="info-item">
-		    <label class="info-label">性別</label>
-		    <div class="info-value">
-		      <label>
-		        <input type="radio" name="gender" value="male" th:checked="${info.gender == 'male'}" />
-		        男性
-		      </label>
-		      <label>
-		        <input type="radio" name="gender" value="female" th:checked="${info.gender == 'female'}" />
-		        女性
-		      </label>
-		      <label>
-		        <input type="radio" name="gender" value="none" th:checked="${info.gender == 'none'}" />
-		        未回答
-		      </label>
+		<form id="editForm" method="post" th:action="@{/mypage/update}">
+		    <!-- 基本情報 -->
+		    <div class="section">
+		      <div class="section-title">基本情報</div>
+			  
+			  <div class="info-item">
+	  	        <div class="info-label">ネーム</div>
+	  	        <input class="check" type="text" id="nickName" data-name="nickName" name="nickName" th:value="${su.nickName}">
+	  	      </div>
+					  
+			  <div class="info-item">
+			    <label class="info-label">性別</label>
+			    <div class="info-value">
+			      <label>
+			        <input type="radio" name="gender" value="male" th:checked="${info.gender == 'male'}" />
+			        男性
+			      </label>
+			      <label>
+			        <input type="radio" name="gender" value="female" th:checked="${info.gender == 'female'}" />
+			        女性
+			      </label>
+			      <label>
+			        <input type="radio" name="gender" value="none" th:checked="${info.gender == 'none'}" />
+			        未回答
+			      </label>
+			    </div>
+			  </div>
+		      <div class="info-item">
+		        <label class="info-label" for="birthday">誕生日</label>
+		        <input type="date" id="birthday" name="birthday" th:value="${info.birthday}" />
+		      </div>
 		    </div>
-		  </div>
-	      <div class="info-item">
-	        <label class="info-label" for="birthday">誕生日</label>
-	        <input type="date" id="birthday" name="birthday" th:value="${info.birthday}" />
-	      </div>
-	    </div>
-
-	    <!-- 氏名情報 -->
-	    <div class="section">
-	      <div class="section-title">氏名</div>
-	      <div class="info-item">
-	        <label class="info-label" for="lastName1">氏名（漢字）</label>
-	        <input type="text" id="lastName1" name="lastName1" th:value="${info.lastName1}" placeholder="姓" />
-	        <input type="text" id="firstName1" name="firstName1" th:value="${info.firstName1}" placeholder="名" />
-	      </div>
-	      <div class="info-item">
-	        <label class="info-label" for="lastName2">氏名（カナ）</label>
-	        <input type="text" id="lastName2" name="lastName2" th:value="${info.lastName2}" placeholder="姓" />
-	        <input type="text" id="firstName2" name="firstName2" th:value="${info.firstName2}" placeholder="名" />
-	      </div>
-	    </div>
-
-	    <!-- 住所情報 -->
-	    <div class="section">
-	      <div class="section-title">住所</div>
-	      <div class="info-item">
-	        <label class="info-label" for="postNumber">郵便番号</label>
-	        <input type="text" id="postNumber" name="postNumber" th:value="${info.postNumber}" />
-	      </div>
-	      <div class="info-item">
-	        <label class="info-label" for="address1">住所1</label>
-	        <input type="text" id="address1" name="address1" th:value="${info.address1}" />
-	      </div>
-	      <div class="info-item">
-	        <label class="info-label" for="address2">住所2</label>
-	        <input type="text" id="address2" name="address2" th:value="${info.address2}" />
-	      </div>
-	      <div class="info-item">
-	        <label class="info-label" for="address3">住所3</label>
-	        <input type="text" id="address3" name="address3" th:value="${info.address3}" />
-	      </div>
-	      <div class="info-item">
-	        <label class="info-label" for="address4">住所4</label>
-	        <input type="text" id="address4" name="address4" th:value="${info.address4}" />
-	      </div>
-	    </div>
-
-	    <!-- その他情報 -->
-	    <div class="section">
-	      <div class="section-title">その他</div>
-	      <div class="info-item">
-	        <label class="info-label" for="creditNumber">クレジットカード番号</label>
-	        <input type="text" id="creditNumber" name="creditNumber" th:value="${info.creditNumber}" />
-	      </div>
-	    </div>
-
-	    <div class="section">
-	      <button type="submit" form="editForm">保存する</button>
-	    </div>
-	</main>
+	
+		    <!-- 氏名情報 -->
+		    <div class="section">
+		      <div class="section-title">氏名</div>
+		      <div class="info-item">
+		        <label class="info-label" for="lastName1">氏名（漢字）</label>
+		        <input class="check" type="text" id="lastName1" name="lastName1" data-name="lastName1" th:value="${info.lastName1}" placeholder="姓" />
+		        <input class="check" type="text" id="firstName1" name="firstName1" data-name="firstName1" th:value="${info.firstName1}" placeholder="名" />
+		      </div>
+		      <div class="info-item">
+		        <label class="info-label" for="lastName2">氏名（カナ）</label>
+		        <input class="check" type="text" id="lastName2" name="lastName2" data-name="lastName2" th:value="${info.lastName2}" placeholder="姓" />
+		        <input class="check" type="text" id="firstName2" name="firstName2" data-name="firstName2" th:value="${info.firstName2}" placeholder="名" />
+		      </div>
+		    </div>
+	
+		    <!-- 住所情報 -->
+		    <div class="section">
+		      <div class="section-title">住所</div>
+			  <div class="info-item">
+			    <label class="info-label" for="postNumber1">郵便番号</label>
+			    <input class="check" type="text" id="postNumber1" name="postNumber1" data-name="postNumber1" maxlength="3" pattern="\d{3}" 
+			           th:value="${#strings.substring(info.postNumber, 0, 3)}" /> -
+			    <input class="check" type="text" id="postNumber2" name="postNumber2" data-name="postNumber2" maxlength="4" pattern="\d{4}" 
+			           th:value="${#strings.substring(info.postNumber, 3, 7)}" />
+			  </div>
+		      <div class="info-item">
+		        <label class="info-label" for="address1">住所1</label>
+		        <input class="check" type="text" id="address1" name="address1" data-name="address1" th:value="${info.address1}" />
+		      </div>
+		      <div class="info-item">
+		        <label class="info-label" for="address2">住所2</label>
+		        <input class="check" type="text" id="address2" name="address2" data-name="address2" th:value="${info.address2}" />
+		      </div>
+		      <div class="info-item">
+		        <label class="info-label" for="address3">住所3</label>
+		        <input class="check" type="text" id="address3" name="address3" data-name="address3" th:value="${info.address3}" />
+		      </div>
+		      <div class="info-item">
+		        <label class="info-label" for="address4">住所4</label>
+		        <input class="check" type="text" id="address4" name="address4" data-name="address4" th:value="${info.address4}" />
+		      </div>
+		    </div>
+	
+		    <!-- その他情報 -->
+		    <div class="section">
+		      <div class="section-title">その他</div>
+			  <div class="info-item">
+			    <label class="info-label" for="creditNumber1">クレジットカード番号</label>
+			    <input class="check" type="text" id="creditNumber1" name="creditNumber1" data-name="creditNumber1" maxlength="4" pattern="\d{4}"
+			           th:value="${#strings.substring(info.creditNumber, 0, 4)}" /> -
+			    <input class="check" type="text" id="creditNumber2" name="creditNumber2" data-name="creditNumber2" maxlength="4" pattern="\d{4}"
+			           th:value="${#strings.substring(info.creditNumber, 4, 8)}" /> -
+			    <input class="check" type="text" id="creditNumber3" name="creditNumber3" data-name="creditNumber3" maxlength="4" pattern="\d{4}"
+			           th:value="${#strings.substring(info.creditNumber, 8, 12)}" /> -
+			    <input class="check" type="text" id="creditNumber4" name="creditNumber4" data-name="creditNumber4" maxlength="4" pattern="\d{4}"
+			           th:value="${#strings.substring(info.creditNumber, 12, 16)}" />
+			  </div>
+		    </div>
+	
+		    <div class="section">
+		      <button type="submit" form="editForm" id="submit">保存する</button>
+		    </div>
+		
 
 	<!-- 提交表单包裹所有输入 -->
-	<form id="editForm" method="post" th:action="@{/mypage/edit}"></form>
+		</form>
+	</main>
 
 	<!-- サイドバー -->
 	<div class="sidebar" id="sidebar">
