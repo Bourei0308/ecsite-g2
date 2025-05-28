@@ -1,0 +1,41 @@
+<form th:action="@{'/manager/customer/edit/' + ${user.ID}}" method="post"
+      onsubmit="return confirm('この内容で保存してもよろしいですか？');">
+    <table>
+        <tr>
+            <th>ID</th>
+            <td th:text="${user.ID}"></td>
+        </tr>
+        <tr>
+            <th>パスワード</th>
+            <td><input type="text" name="password" th:value="${user.password}" /></td>
+        </tr>
+        <tr>
+            <th>ニックネーム</th>
+            <td><input type="text" name="nickName" th:value="${user.nickName}" /></td>
+        </tr>
+        <tr>
+            <th>管理者フラグ</th>
+            <td>
+                <input type="checkbox" name="adminFlag" th:checked="${user.adminFlag}" />
+                <label>管理者</label>
+            </td>
+        </tr>
+        <tr>
+            <th>削除フラグ</th>
+            <td>
+                <input type="checkbox" name="deleteFlag" th:checked="${user.deleteFlag}" />
+                <label>削除扱い</label>
+            </td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td><input type="email" name="email" th:value="${user.email}" /></td>
+        </tr>
+        <tr>
+            <th>電話番号</th>
+            <td><input type="text" name="phone_number" th:value="${user.phone_number}" /></td>
+        </tr>
+    </table>
+    <button type="submit">保存</button>
+</form>
+<a href="/manager/customerlist">← 一覧に戻る</a>

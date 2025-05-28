@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>顧客詳細</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>顧客詳細</h2>
+    <table>
+        <tr><th>ID</th><td th:text="${user.ID}"></td></tr>
+        <tr><th>パスワード</th><td th:text="${user.password}"></td></tr>
+        <tr><th>ニックネーム</th><td th:text="${user.nickName}"></td></tr>
+        <tr><th>メールアドレス</th><td th:text="${user.email}"></td></tr>
+        <tr><th>電話番号</th><td th:text="${user.phone_number}"></td></tr>
+        <tr><th>管理者フラグ</th><td th:text="${user.adminFlag} ? '管理者' : '一般'"></td></tr>
+        <tr><th>削除フラグ</th><td th:text="${user.deleteFlag} ? '削除済み' : '有効'"></td></tr>
+        <tr><th>作成日</th><td th:text="${#dates.format(user.created_at, 'yyyy-MM-dd HH:mm')}"></td></tr>
+        <tr><th>最終ログイン</th><td th:text="${#dates.format(user.login_at, 'yyyy-MM-dd HH:mm')}"></td></tr>
+    </table>
+    <br>
+    <a href="/manager/customerlist">← 一覧に戻る</a>
+</body>
+</html>

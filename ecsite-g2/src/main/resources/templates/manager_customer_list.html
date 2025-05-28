@@ -1,0 +1,19 @@
+<h2>顧客一覧</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>名前</th><th>メール</th><th>詳細</th><th>編集</th><th>削除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.ID}"></td>
+            <td th:text="${user.nickName}"></td>
+            <td th:text="${user.email}"></td>
+            <td><a th:href="@{'/manager/customer/' + ${user.ID}}">詳細</a></td>
+			<td><a th:href="@{'/manager/customer/edit/' + ${user.ID}}">編集</a></td>
+            <td><a th:href="@{'/manager/customer/delete/' + ${user.ID}}"
+                   onclick="return confirm('本当に削除しますか？');">削除</a></td>
+        </tr>
+    </tbody>
+</table>
