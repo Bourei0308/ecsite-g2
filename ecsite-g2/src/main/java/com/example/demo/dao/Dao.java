@@ -109,14 +109,22 @@ public class Dao {
 		sql = sql + contentRQ + sdRQ + edRQ;
 		return sql;
 	}
-	public SiteUser findUserByNickAndPassword(String nickName, String password) {
-	    String sql = "SELECT * FROM SiteUser WHERE nickName = ? AND password = ?";
-	    try {
-	        return db.queryForObject(sql, new SiteUserRowMapper(), nickName, password);
-	    } catch (Exception e) {
-	        return null; 
-	    }
+
+	//ログインチェック
+	public SiteUser findUserByPhoneOrEmailAndPassword(String account, String password) {
+		String sql = "SELECT * FROM SiteUser WHERE (phone_number = ? OR email = ?) AND password = ?";
+
+		List<SiteUser> users = db.query(sql, new SiteUserRowMapper(), account, account, password);
+		return users.isEmpty() ? null : users.get(0);
 	}
-	
+
+	public SiteUser findUserByNickAndPassword(String nickName, String password) {
+		String sql = "SELECT * FROM SiteUser WHERE nickName = ? AND password = ?";
+		try {
+			return db.queryForObject(sql, new SiteUserRowMapper(), nickName, password);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 }

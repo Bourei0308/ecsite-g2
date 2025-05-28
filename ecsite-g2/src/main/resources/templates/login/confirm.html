@@ -8,19 +8,41 @@
 	 <body th:object="${su}">
 		<h2>確認画面</h2>
 		
-		<div th:text="*{nickName}"></div>
-		<div th:text="*{password}"></div>
-		<div th:text="*{adminFlag}"></div>
-		<div th:text="*{email}"></div>
-		<div th:text="*{phone_number}"></div>
+		<div>以下の情報で登録します</div>
 		
+		<table>
+			<tr>
+				<th>ニックネーム</th>
+				<th><span th:text="${su.nickName}"></span></th>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<th><span th:text="${su.email}"></span></th>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<th><span th:text="${su.password}"></span></tb>
+			</tr>
+			<tr>
+				<th>携帯電話番号</th>
+				<th><span th:text="${su.phone_number}"></span></th>
+			</tr>
+			<tr>
+				<th>管理者権限</th>
+				<th><span th:text="${su.adminFlag} ? 'あり' : 'なし'"></span></tb>
+			</tr>
+			
+			
+		</table>
+		
+	
 		<form action="#" method="get" th:action="@{/complete}">
 			<input type="hidden" th:field="*{nickName}">
 			<input type="hidden" th:field="*{password}">
 			<input type="hidden" th:field="*{adminFlag}">
 			<input type="hidden" th:field="*{email}">
 			<input type="hidden" th:field="*{phone_number}">
-			<input type="submit" value="完了画面">
+			<input type="submit" value="確定">
 		</form>
 		
 		<form action="#" method="get" th:action="@{/signIn}">

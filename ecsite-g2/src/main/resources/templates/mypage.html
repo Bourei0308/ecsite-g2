@@ -3,8 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <title>個人ページ</title>
+<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
 </head>
 <body>
+	<header>
+		<div class="mp_header">
+			<div class="sidebar_btn"></div>
+			<div class="header_title">マイページ</div>
+		</div>
+	</header>
+	
+	<main>
+	    <!-- 基本情報 -->
+	    <div class="section">
+	      <div class="section-title">基本情報</div>
+	      <div class="info-item">
+	        <div class="info-label">ネーム</div>
+	        <div class="info-value" th:text="${su.nickName}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">性別</div>
+	        <div class="info-value" th:text="${info.gender}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">誕生日</div>
+	        <div class="info-value" th:text="${info.birthday}"></div>
+	      </div>
+	    </div>
 
+	    <!-- 氏名情報 -->
+	    <div class="section">
+	      <div class="section-title">氏名</div>
+	      <div class="info-item">
+	        <div class="info-label">氏名（漢字）</div>
+	        <div class="info-value" th:text="${info.lastName1 + ' ' + info.firstName1}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">氏名（カナ）</div>
+	        <div class="info-value" th:text="${info.lastName2 + ' ' + info.firstName2}"></div>
+	      </div>
+	    </div>
+
+	    <!-- 住所情報 -->
+	    <div class="section">
+	      <div class="section-title">住所</div>
+	      <div class="info-item">
+	        <div class="info-label">郵便番号</div>
+	        <div class="info-value" th:text="${info.postNumber}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">住所1</div>
+	        <div class="info-value" th:text="${info.address1}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">住所2</div>
+	        <div class="info-value" th:text="${info.address2}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">住所3</div>
+	        <div class="info-value" th:text="${info.address3}"></div>
+	      </div>
+	      <div class="info-item">
+	        <div class="info-label">住所4</div>
+	        <div class="info-value" th:text="${info.address4}"></div>
+	      </div>
+	    </div>
+
+	    <!-- その他情報 -->
+	    <div class="section">
+	      <div class="section-title">その他</div>
+	      <div class="info-item">
+	        <div class="info-label">クレジットカード番号</div>
+	        <div class="info-value" th:text="${info.creditNumber}"></div>
+	      </div>
+	    </div>
+	  </main>
+	
+	<!-- カバー -->
+	  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+	  <!-- サイドバー -->
+	  <div class="sidebar" id="sidebar">
+		<button class="current info-check">情報確認</button>
+		<form th:action="@{/mypage/edit}" method="post">
+		  <button type="submit" class="info-check">情報編集</button>
+		</form>
+	  </div>
+
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="script.js" th:src="@{/script.js}"></script>
 </body>
 </html>
