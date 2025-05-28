@@ -1,4 +1,4 @@
-INSERT INTO SiteUser (password,nickName,adminFlag,deleteFlag,email,phone_number) VALUES ('1234','Taro',0,0,'a@a.com','123456');
+INSERT INTO SiteUser (pw,nickName,adminFlag,deleteFlag,email,phone_number) VALUES ('1234','Taro',0,0,'a@a.com','123456');
 INSERT INTO SiteUserInfo (
   ID, gender, postNumber, address1, address2, address3, address4,
   creditNumber, birthday, firstName1, lastName1, firstName2, lastName2
