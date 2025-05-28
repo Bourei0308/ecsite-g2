@@ -43,6 +43,7 @@ public class UserInfoDao {
     // 取得
     public SiteUserInfo getById(int id) {
         String sql = "SELECT * FROM SiteUserInfo WHERE ID = ?";
+        System.out.println("Executing SQL: " + sql + ", with ID=" + id);
         return jdbc.queryForObject(sql, mapper, id);
     }
 
@@ -76,7 +77,7 @@ public class UserInfoDao {
             info.setAddress2(rs.getString("address2"));
             info.setAddress3(rs.getString("address3"));
             info.setAddress4(rs.getString("address4"));
-            info.setCreditNumber(rs.getInt("creditNumber"));
+            info.setCreditNumber(rs.getString("creditNumber"));
             info.setBirthday(rs.getString("birthday")); // 型注意：必要なら java.sql.Date に変えてください
             info.setFirstName1(rs.getString("firstName1"));
             info.setLastName1(rs.getString("lastName1"));

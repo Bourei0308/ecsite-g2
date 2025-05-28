@@ -9,8 +9,14 @@
 		<h2>顧客ログイン画面</h2>
 		
 		
+		<form method="get" th:action="@{/signInUser}" th:object="${su}">
+			<p>電話番号：<input type="text" th:field="*{phone_number}"></p>
+			<p>パスワード：<input type="text" th:field="*{password}"></p>
+			<input type="submit" value="ログイン">
+		</form>
+		
 		<form action="#" method="get" th:action="@{/signIn}">
-			<input type="submit" value="ユーザー登録入力画面">
+			<input type="submit" value="新規登録">
 		</form>
 	
 	 </body>

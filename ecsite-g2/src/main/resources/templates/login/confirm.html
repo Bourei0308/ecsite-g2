@@ -5,11 +5,21 @@
 	 	<meta charset="utf-8" />
 	 </head>
  
-	 <body>
+	 <body th:object="${su}">
 		<h2>確認画面</h2>
 		
+		<div th:text="*{nickName}"></div>
+		<div th:text="*{password}"></div>
+		<div th:text="*{adminFlag}"></div>
+		<div th:text="*{email}"></div>
+		<div th:text="*{phone_number}"></div>
 		
 		<form action="#" method="get" th:action="@{/complete}">
+			<input type="hidden" th:field="*{nickName}">
+			<input type="hidden" th:field="*{password}">
+			<input type="hidden" th:field="*{adminFlag}">
+			<input type="hidden" th:field="*{email}">
+			<input type="hidden" th:field="*{phone_number}">
 			<input type="submit" value="完了画面">
 		</form>
 		

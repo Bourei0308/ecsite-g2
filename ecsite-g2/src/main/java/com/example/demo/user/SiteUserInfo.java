@@ -9,7 +9,7 @@ public class SiteUserInfo {
 	private String address2;
 	private String address3;
 	private String address4;
-	private Integer creditNumber;
+	private String creditNumber;
 	private String birthday;
 	private String firstName1;
 	private String lastName1;
@@ -76,11 +76,11 @@ public class SiteUserInfo {
 		this.address4 = address4;
 	}
 
-	public Integer getCreditNumber() {
+	public String getCreditNumber() {
 		return creditNumber;
 	}
 
-	public void setCreditNumber(Integer creditNumber) {
+	public void setCreditNumber(String creditNumber) {
 		this.creditNumber = creditNumber;
 	}
 
