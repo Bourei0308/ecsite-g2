@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.List;
-
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +31,11 @@ public class UserWebController {
 
 	//ログイン画面
 	@RequestMapping("/login")
-	public String index(Model model) {
-		List<SiteUser> userList = dao.getAllUsers();
+	public String index(SiteUser su, Model model,HttpSession session) {
+		su = (SiteUser)session.getAttribute("su");
+		if(su!=null) {
+			session.removeAttribute("su");
+		}
 
 		model.addAttribute("su", new SiteUser());
 		return "index";
@@ -91,8 +92,9 @@ public class UserWebController {
 	//ログイン機能
 	@PostMapping("/login")
 	public String login(@ModelAttribute("su") SiteUser su, Model model,HttpSession session) {
+		
 		su = dao.findUserByPhoneOrEmailAndPassword(su.getPhone_number(), su.getPassword());
-
+		
 		if (su != null) {
 			model.addAttribute("su", su); // 必要に応じてセッション管理
 			session.setAttribute("su", su); // 必要に応じてセッション管理

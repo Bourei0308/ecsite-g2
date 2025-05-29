@@ -23,37 +23,10 @@ public class ManagerController {
         this.dao = dao;
     }
 
-    // ==== ログイン ====
-    @GetMapping("/login/temp")
-    public String showLoginForm() {
-        return "login_temp";
-    }
-
-    @PostMapping("/login/temp")
-    public String loginTemp(@RequestParam String nickName,
-                             @RequestParam String password,
-                             HttpSession session,
-                             Model model) {
-        SiteUser user = dao.findUserByNickAndPassword(nickName, password);
-
-        if (user == null) {
-            model.addAttribute("error", "ユーザー名またはパスワードが違います。");
-            return "login_temp";
-        }
-
-        if (!user.getAdminFlag()) {
-            model.addAttribute("error", "管理者権限がありません。");
-            return "login_temp";
-        }
-
-        session.setAttribute("loginUser", user);
-        return "redirect:/manager/customerlist";
-    }
-
     // ==== 顧客管理 ====
     @GetMapping("/manager/customerlist")
     public String showCustomerList(Model model, HttpSession session) {
-        if (!isLoggedIn(session)) return "redirect:/login/temp";
+        if (!isLoggedIn(session)) return "redirect:/login";
 
         List<SiteUser> userList = dao.getAllUsers();
         model.addAttribute("userList", userList);
@@ -62,7 +35,7 @@ public class ManagerController {
 
     @GetMapping("/manager/customer/{id}")
     public String showCustomerDetail(@PathVariable int id, Model model, HttpSession session) {
-        if (!isLoggedIn(session)) return "redirect:/login/temp";
+        if (!isLoggedIn(session)) return "redirect:/login";
 
         SiteUser user = dao.getUserById(id);
         model.addAttribute("user", user);
@@ -71,7 +44,7 @@ public class ManagerController {
 
     @GetMapping("/manager/customer/delete/{id}")
     public String deleteCustomer(@PathVariable int id, HttpSession session) {
-        if (!isLoggedIn(session)) return "redirect:/login/temp";
+        if (!isLoggedIn(session)) return "redirect:/login";
 
         dao.deleteUserById(id);
         return "manager_customer_complete";
@@ -79,7 +52,7 @@ public class ManagerController {
 
     @GetMapping("/manager/customer/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model, HttpSession session) {
-        if (!isLoggedIn(session)) return "redirect:/login/temp";
+        if (!isLoggedIn(session)) return "redirect:/login";
 
         SiteUser user = dao.getUserById(id);
         model.addAttribute("user", user);
@@ -95,7 +68,7 @@ public class ManagerController {
                                  @RequestParam String email,
                                  @RequestParam String phone_number,
                                  HttpSession session) {
-        if (!isLoggedIn(session)) return "redirect:/login/temp";
+        if (!isLoggedIn(session)) return "redirect:/login";
 
         dao.updateUser(id, "password", password);
         dao.updateUser(id, "nickName", nickName);
@@ -115,7 +88,7 @@ public class ManagerController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); 
-        return "redirect:/login/temp"; 
+        return "redirect:/login"; 
     }
     @GetMapping("/no-permission")
     public String noPermission() {

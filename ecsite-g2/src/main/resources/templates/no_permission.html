@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>アクセスエラー</title>
-    <script>
-        window.onload = function () {
-            if (confirm("管理者権限が必要です。ログイン画面に移動しますか？")) {
-                window.location.href = "/login/temp";
-            } else {
-                history.back(); // 戻る
-            }
-        }
-    </script>
+    
 </head>
 <body>
-    <p>処理中...</p>
+	<p>管理者権限が必要です。</p>
+	<button onclick="window.location.href='/login'">ログイン画面に移動</button>
+	<button onclick="history.back()">戻る</button>
 </body>
 </html>
