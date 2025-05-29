@@ -32,6 +32,10 @@ body {
 		margin: 25px;
 		font-size: 14px;
 		}
+		
+		.text4{
+			text-align: center;		
+		}
 
     header {
         background-color: #efefef;
@@ -110,7 +114,7 @@ body {
         font-size: 14px;
         border-radius: 20px;
         cursor: pointer;
-        margin-top: 15px;
+        margin-top: 30px;
     }
 
 	
@@ -137,3 +141,13 @@ body {
 	.red{
 		color: red;
 	}
+	
+	.table1{
+			margin: 0 auto;
+			margin-top: 20px;
+			width: 400px;
+		}
+		
+		.table1 th:first-child {
+		  border-bottom: 1px solid black; /* 下線を引く */
+		}

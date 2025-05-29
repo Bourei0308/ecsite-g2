@@ -3,54 +3,58 @@
  
 	 <head>
 	 	<meta charset="utf-8" />
+		<link rel="stylesheet" th:href="@{/signin.css}">
+		<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
 	 </head>
  
 	 <body th:object="${su}">
-		<h2>確認画面</h2>
 		
-		<div>以下の情報で登録します</div>
+		<header>
+			<a href="">TEAM2SITE</a>
+		</header>
+						
+		<h2 class="text">会員情報確認</h2>
+
 		
-		<table>
-			<tr>
-				<th>ニックネーム</th>
-				<th><span th:text="${su.nickName}"></span></th>
-			</tr>
-			<tr>
-				<th>メールアドレス</th>
-				<th><span th:text="${su.email}"></span></th>
-			</tr>
-			<tr>
-				<th>パスワード</th>
-				<th><span th:text="${su.password}"></span></tb>
-			</tr>
-			<tr>
-				<th>携帯電話番号</th>
-				<th><span th:text="${su.phone_number}"></span></th>
-			</tr>
-			<tr>
-				<th>管理者権限</th>
-				<th><span th:text="${su.adminFlag} ? 'あり' : 'なし'"></span></tb>
-			</tr>
+		<div class="section">
+			<div class="text4">以下の内容でよろしいですか？</div>
 			
+				<table class="table1">
+					<tr>
+						<th class="text3">ニックネーム</th>
+						<th><span class="text3" th:text="${su.nickName}"></span></th>
+					</tr>
+					<tr>
+						<th class="text3">メールアドレス</th>
+						<th><span class="text3" th:text="${su.email}"></span></th>
+					</tr>
+					<tr>
+						<th class="text3">パスワード</th>
+						<th><span class="text3" th:text="${su.password}"></span></tb>
+					</tr>
+					<tr>
+						<th class="text3">携帯電話番号</th>
+						<th><span class="text3" th:text="${su.phone_number}"></span></th>
+					</tr>
+				</table>
 			
-		</table>
+			<form action="#" method="get" th:action="@{/login}">
+				<input type="hidden" th:field="*{nickName}">
+				<input type="hidden" th:field="*{password}">
+				<input type="hidden" th:field="*{adminFlag}">
+				<input type="hidden" th:field="*{email}">
+				<input type="hidden" th:field="*{phone_number}">
+				<input type="submit" value="確定">
+			</form>
+			<form action="#" method="get" th:action="@{/signIn}">
+				<input type="submit" value="戻る">
+			</form>
+		</div>
 		
-	
-		<form action="#" method="get" th:action="@{/complete}">
-			<input type="hidden" th:field="*{nickName}">
-			<input type="hidden" th:field="*{password}">
-			<input type="hidden" th:field="*{adminFlag}">
-			<input type="hidden" th:field="*{email}">
-			<input type="hidden" th:field="*{phone_number}">
-			<input type="submit" value="確定">
-		</form>
-		
-		<form action="#" method="get" th:action="@{/signIn}">
-			<input type="submit" value="戻る">
-		</form>
 		<footer>
 			<div>@TEAM2,Inc.</div>
 		</footer>
+	
 	 </body>
 
   </html>
