@@ -27,15 +27,18 @@ public class UserEditController {
 	@RequestMapping("/mypage")
 	public String mypage(
 			Model model,SiteUser su,SiteUserInfo info,HttpSession session) {
-		int ID = (su.getID()!=null)?su.getID():1;
-		
-		su = db.getUserById(ID);
-		info = infodb.getById(ID);
+		su = (SiteUser)session.getAttribute("su");
+		if(su==null) {
+			return "redirect:/login";
+		}
+		int ID = su.getID();
+		info = (infodb.getById(ID)!=null)?infodb.getById(ID):new SiteUserInfo();
 		
 		model.addAttribute("info", info);
 		model.addAttribute("su", su);
 		session.setAttribute("info", info);
 		session.setAttribute("su", su);
+		model.addAttribute("isAdmin", su.getAdminFlag() == true); // 添加此行
 		return "mypage";
 	}
 	
@@ -45,13 +48,14 @@ public class UserEditController {
 		su = (SiteUser)session.getAttribute("su");
 		info = (SiteUserInfo)session.getAttribute("info");
 		
-		if(su==null||info==null) {
-			return "redirect:/mypage";
+		if(su==null) {
+			return "redirect:/login";
 		}
 		
 		// 放入 model
 	    model.addAttribute("su", su);
 	    model.addAttribute("info", info);
+	    model.addAttribute("isAdmin", su.getAdminFlag() == true);
 
 		return "useredit";
 	}
@@ -59,6 +63,8 @@ public class UserEditController {
 	@PostMapping("/mypage/update")
 	public String update(
 	        @RequestParam("nickName") String nickName,
+	        @RequestParam("email") String email,
+	        @RequestParam("phone_number") String phone_number,
 	        
 	        @RequestParam("postNumber1") String postNumber1,
 	        @RequestParam("postNumber2") String postNumber2,
@@ -74,11 +80,12 @@ public class UserEditController {
         // 假设 session 中保存了当前登录用户
         SiteUser su = (SiteUser) session.getAttribute("su");
         if (su == null) {
-            return "redirect:/mypage"; // 未登录跳转登录页
+            return "redirect:/login"; // 未登录跳转登录页
         }
-
         // 更新 SiteUser
         db.updateUser(su.getID(), "nickName", nickName);
+        db.updateUser(su.getID(), "phone_number", phone_number);
+        db.updateUser(su.getID(), "email", email);
 
         // 设定 ID 给 info
         info.setID(su.getID());

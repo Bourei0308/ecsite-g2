@@ -156,3 +156,20 @@ body {
       .info-value {
         flex: 1;
       }
+	  
+	  .logout-link {
+	    margin-right: 1rem;
+	    text-decoration: none;
+	    color: white;
+	    font-weight: bold;
+	  }
+
+	  .logout-link:hover {
+	    text-decoration: underline;
+	    color: white;
+	  }
+	  
+	  .linkBox {
+	      margin-left: auto;
+	      padding-right: 10px;
+	  }

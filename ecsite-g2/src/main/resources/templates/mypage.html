@@ -10,6 +10,9 @@
 		<div class="mp_header">
 			<div class="sidebar_btn"></div>
 			<div class="header_title">マイページ</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
 		</div>
 	</header>
 	
@@ -29,6 +32,16 @@
 	        <div class="info-label">誕生日</div>
 	        <div class="info-value" th:text="${info.birthday}"></div>
 	      </div>
+		  
+		  <div class="info-item">
+  	        <div class="info-label">メール</div>
+  	        <div class="info-value" th:text="${su.email}"></div>
+  	      </div>
+				  
+		  <div class="info-item">
+  	        <div class="info-label">電話番号</div>
+  	        <div class="info-value" th:text="${su.phone_number}"></div>
+  	      </div>
 	    </div>
 
 	    <!-- 氏名情報 -->
@@ -36,11 +49,11 @@
 	      <div class="section-title">氏名</div>
 	      <div class="info-item">
 	        <div class="info-label">氏名（漢字）</div>
-	        <div class="info-value" th:text="${info.lastName1 + ' ' + info.firstName1}"></div>
+	        <div class="info-value" th:text="${(info.lastName1 ?: '') + ' ' + (info.firstName1 ?: '')}"></div>
 	      </div>
 	      <div class="info-item">
 	        <div class="info-label">氏名（カナ）</div>
-	        <div class="info-value" th:text="${info.lastName2 + ' ' + info.firstName2}"></div>
+	        <div class="info-value" th:text="${(info.lastName2 ?: '') + ' ' + (info.firstName2 ?: '')}"></div>
 	      </div>
 	    </div>
 
@@ -88,6 +101,11 @@
 		<form th:action="@{/mypage/edit}" method="post">
 		  <button type="submit" class="info-check">情報編集</button>
 		</form>
+		
+		<!-- 管理者専用 -->
+		  <form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
+		    <button type="submit" class="info-check">顧客一覧</button>
+		  </form>
 	  </div>
 
 	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

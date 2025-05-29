@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        SiteUser user = (SiteUser) session.getAttribute("loginUser");
+        SiteUser user = (SiteUser) session.getAttribute("su");
 
         if (user == null || !user.getAdminFlag()) {
             response.sendRedirect("/no-permission");
