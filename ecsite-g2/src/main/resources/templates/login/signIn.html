@@ -17,6 +17,7 @@
 		
 		
 		<form method="post" th:action="@{/confirm}" th:object="${su}">
+			<p>基本情報</p>
 			<p>ニックネーム<br><input type="text" th:field="*{nickName}"></p>
 			<div th:if="${#fields.hasErrors('nickName')}"  th:errors="*{nickName}">エラー</div>
 			<p>パスワード<br><input type="password" th:field="*{password}"></p>
@@ -32,7 +33,7 @@
 			<input type="submit" value="確認画面">
 		</form>
 
-		<form action="#" method="get" th:action="@{/index}">
+		<form action="#" method="get" th:action="@{/login}">
 			<input type="submit" value="戻る">
 		</form>
 	
