@@ -27,7 +27,10 @@ public class ManagerController {
     @GetMapping("/manager/customerlist")
     public String showCustomerList(Model model, HttpSession session) {
         if (!isLoggedIn(session)) return "redirect:/login";
-
+        
+        SiteUser su = (SiteUser)session.getAttribute("su");
+        model.addAttribute("isAdmin", su.getAdminFlag() == true);
+        
         List<SiteUser> userList = dao.getAllUsers();
         model.addAttribute("userList", userList);
         return "manager_customer_list";
@@ -36,6 +39,9 @@ public class ManagerController {
     @GetMapping("/manager/customer/{id}")
     public String showCustomerDetail(@PathVariable int id, Model model, HttpSession session) {
         if (!isLoggedIn(session)) return "redirect:/login";
+        
+        SiteUser su = (SiteUser)session.getAttribute("su");
+        model.addAttribute("isAdmin", su.getAdminFlag() == true);
 
         SiteUser user = dao.getUserById(id);
         model.addAttribute("user", user);
@@ -53,6 +59,9 @@ public class ManagerController {
     @GetMapping("/manager/customer/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model, HttpSession session) {
         if (!isLoggedIn(session)) return "redirect:/login";
+        
+        SiteUser su = (SiteUser)session.getAttribute("su");
+        model.addAttribute("isAdmin", su.getAdminFlag() == true);
 
         SiteUser user = dao.getUserById(id);
         model.addAttribute("user", user);

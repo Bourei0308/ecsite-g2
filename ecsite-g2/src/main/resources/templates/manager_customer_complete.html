@@ -28,20 +28,11 @@
 	
 	
 	<!-- カバー -->
-		  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-		  <!-- サイドバー -->
-		  <div class="sidebar" id="sidebar">
-			<form th:action="@{/mypage}" method="post">
-			  <button type="submit" class="info-check">情報確認</button>
-			</form>
-  			<form th:action="@{/mypage/edit}" method="post">
-  			  <button type="submit" class="info-check">情報編集</button>
-  			</form>
-  			
-  			<!-- 管理者専用 -->
-  			<button type="submit" class="info-check current">顧客一覧</button>
-  		  </div>
+	<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+	<div id="user_admin"></div>
+		<script th:if="${isAdmin}" th:inline="javascript">
+			    window.isAdmin = true;
+		</script>
 	
 	
 	<footer>

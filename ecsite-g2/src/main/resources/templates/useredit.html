@@ -130,22 +130,16 @@
 	</main>
 
 	<!-- サイドバー -->
-	<div class="sidebar" id="sidebar">
-		<form th:action="@{/mypage}" method="post">
-		  <button type="submit" class="info-check">情報確認</button>
-		</form>
-		<button class="current info-check">情報編集</button>
-		<!-- 管理者専用 -->
-		  <form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
-		    <button type="submit" class="info-check">顧客一覧</button>
-		  </form>
-	</div>
+	<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+	<div id="info_edit"></div>
+	<script th:if="${isAdmin}" th:inline="javascript">
+		    window.isAdmin = true;
+	</script>
 	
 	<footer>
 		<div>@TEAM2,Inc.</div>
 	</footer>
 	
-	<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="script.js" th:src="@{/script.js}"></script>

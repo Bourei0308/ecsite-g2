@@ -1,5 +1,55 @@
 
+$(document).ready(function () {
+    // 检查页面上是否有任意一个目标元素
+    if ($("#info_check").length === 0 &&
+        $("#info_edit").length === 0 &&
+		$("#address_add").length === 0 &&
+		$("#address_edit").length === 0 &&
+        $("#user_admin").length === 0) {
+        return; // 什么都没有就不生成
+    }
 
+    const $sidebar = $('<div>', { class: 'sidebar', id: 'sidebar' });
+
+    // 情報確認
+    if ($("#info_check").length > 0) {
+        $sidebar.append('<button class="current">情報確認</button>');
+    } else {
+        $sidebar.append(`
+            <form method="get" action="/mypage">
+                <button type="submit">情報確認</button>
+            </form>
+        `);
+    }
+
+    // 情報編集
+    if ($("#info_edit").length > 0) {
+        $sidebar.append('<button class="current">情報編集</button>');
+    } else {
+        $sidebar.append(`
+            <form method="post" action="/mypage/edit">
+                <button type="submit">情報編集</button>
+            </form>
+        `);
+    }
+
+    // 管理者チェック（ThymeleafからisAdminをdata属性で渡しておく）
+
+    if (window.isAdmin) {
+        if ($("#user_admin").length > 0) {
+            $sidebar.append('<button class="current">顧客一覧</button>');
+        } else {
+            $sidebar.append(`
+                <form method="get" action="/manager/customerlist">
+                    <button type="submit">顧客一覧</button>
+                </form>
+            `);
+        }
+    }
+
+    // 插入 Sidebar（你可以根据实际情况插入到指定位置）
+    $("body").prepend($sidebar);
+});
 
 $(document).ready(function () {
   $('.sidebar_btn').on('click', function () {
