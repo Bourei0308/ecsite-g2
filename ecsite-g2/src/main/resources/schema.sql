@@ -30,4 +30,14 @@ CREATE TABLE IF NOT EXISTS SiteUserInfo(
 	PRIMARY KEY(ID)
 );
 
+CREATE TABLE IF NOT EXISTS SiteUserAddress(
+    ID INT NOT NULL,
+    addressID INT NOT NULL,
+    postNumber INTEGER NOT NULL,
+    address1 VARCHAR(100) NOT NULL,
+    address2 VARCHAR(100) NOT NULL,
+    address3 VARCHAR(100) NOT NULL,
+    address4 VARCHAR(100)
+);
+
 

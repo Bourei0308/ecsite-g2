@@ -25,7 +25,7 @@ public class Dao {
 		db.update(sql,
 				su.getPassword(),
 				su.getNickName(),
-				su.getAdminFlag(),
+				0,
 				su.getEmail(),
 				su.getCreated_at(),
 				su.getLogin_at(),

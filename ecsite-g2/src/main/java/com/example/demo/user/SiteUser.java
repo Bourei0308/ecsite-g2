@@ -3,7 +3,6 @@ package com.example.demo.user;
 import java.sql.Timestamp;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class SiteUser {
@@ -18,7 +17,6 @@ public class SiteUser {
 	@Size(max = 100, message = "ニックネームは100文字以内で入力してください。")
 	private String nickName;
 
-	@NotNull(message = "管理者フラグは必須項目です。")
 	private Boolean adminFlag;
 
 	private Boolean deleteFlag;
