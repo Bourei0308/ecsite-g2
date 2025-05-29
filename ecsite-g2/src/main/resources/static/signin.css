@@ -9,7 +9,7 @@ body {
 		font-size: 25px;
 		margin-bottom: 60px;
 		font-weight: bold;
-		margin-left: 20px;
+		margin-left: 20px
 	}
 	
 
@@ -34,7 +34,7 @@ body {
 
     form {
         background-color: #efefef;
-        max-width: 400px;
+        max-width: 600px;
         margin: 0 auto 20px;
         padding: 30px 25px;
         border-radius: 6px;
