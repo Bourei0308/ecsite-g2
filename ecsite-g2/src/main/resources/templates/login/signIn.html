@@ -4,6 +4,7 @@
 	 <head>
 	 	<meta charset="utf-8" />
 		<link rel="stylesheet" th:href="@{/signin.css}">
+		<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
 	 </head>
  
 	 <body>
@@ -15,26 +16,29 @@
 		<h2 class="text">新規会員登録</h2>
 		
 		
+		<div class="form1">
+			<form method="post" th:action="@{/confirm}" th:object="${su}">
+				<p class="text1">基本情報</p>
+	
+				<p class="text3">ニックネーム　<span class="red">必須</span><input class="check" type="text" data-name="nickName" th:field="*{nickName}"></p>
+				<div th:if="${#fields.hasErrors('nickName')}"  th:errors="*{nickName}">エラー</div>
+				<p class="text3">パスワード　<span class="red">必須</span><input class="check" type="password" data-name="password" th:field="*{password}"></p>
+				<div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">エラー</div>
+				<p class="text3">もう一度パスワードを入力してください　<span class="red">必須</span><input class="check" type="password" name="confirmPassword" data-name="confirmPassword"></p>
+				<p class="text3">メールアドレス　<span class="red">必須</span><input class="check" type="text" data-name="email" th:field="*{email}" placeholder="例) zozo@zozotown.jp"></p>
+				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}">エラー</div>
+				<p class="text3">携帯電話番号　<span class="red">必須</span><input class="check" type="text" data-name="phone_number" th:field="*{phone_number}"></p>
+				<div th:if="${#fields.hasErrors('phone_number')}"  th:errors="*{phone_number}">エラー</div>
+			
+				<input type="submit" value="確認画面">
+			</form>
+			
+			<form action="#" method="get" th:action="@{/login}" class="form2">
+				<input type="submit" value="戻る">
+			</form>
+		</div>
 		
-		<form method="post" th:action="@{/confirm}" th:object="${su}" class="form1">
-			<p class="text1">基本情報</p>
-
-			<p class="text3">ニックネーム　<span class="red">必須</span><input class="check" type="text" data-name="nickName" th:field="*{nickName}"></p>
-			<div th:if="${#fields.hasErrors('nickName')}"  th:errors="*{nickName}">エラー</div>
-			<p class="text3">パスワード　<span class="red">必須</span><input class="check" type="password" data-name="password" th:field="*{password}"></p>
-			<div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">エラー</div>
-			<p class="text3">もう一度パスワードを入力してください　<span class="red">必須</span><input class="check" type="password" name="confirmPassword" data-name="confirmPassword"></p>
-			<p class="text3">メールアドレス　<span class="red">必須</span><input class="check" type="text" data-name="email" th:field="*{email}" placeholder="例) zozo@zozotown.jp"></p>
-			<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}">エラー</div>
-			<p class="text3">携帯電話番号　<span class="red">必須</span><input class="check" type="text" data-name="phone_number" th:field="*{phone_number}"></p>
-			<div th:if="${#fields.hasErrors('phone_number')}"  th:errors="*{phone_number}">エラー</div>
-		
-			<input type="submit" value="確認画面">
-		</form>
-
-		<form action="#" method="get" th:action="@{/login}" class="form2">
-			<input type="submit" value="戻る">
-		</form>
+			
 		<footer>
 			<div>@TEAM2,Inc.</div>
 		</footer>

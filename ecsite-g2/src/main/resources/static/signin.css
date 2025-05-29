@@ -63,8 +63,8 @@ body {
     }
 	
 	.form2 {
-		max-width: 600px;
-		margin: 0 auto 70px;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
 	    }
 
     form div {

@@ -108,21 +108,21 @@
 		    <div class="section">
 		      <div class="section-title">その他</div>
 			  <div class="info-item">
-			    <label class="info-label" for="creditNumber1">クレジットカード番号</label>
-			    <input class="check" type="text" id="creditNumber1" name="creditNumber1" data-name="creditNumber1" maxlength="4" pattern="\d{4}"
+			    <label class="info-label" for="creditNumber1">カード番号</label>
+			    <input class="check credit_box" type="text" id="creditNumber1" name="creditNumber1" data-name="creditNumber1" maxlength="4" pattern="\d{4}"
 			           th:value="${#strings.substring(info.creditNumber, 0, 4)}" /> -
-			    <input class="check" type="text" id="creditNumber2" name="creditNumber2" data-name="creditNumber2" maxlength="4" pattern="\d{4}"
+			    <input class="check credit_box" type="text" id="creditNumber2" name="creditNumber2" data-name="creditNumber2" maxlength="4" pattern="\d{4}"
 			           th:value="${#strings.substring(info.creditNumber, 4, 8)}" /> -
-			    <input class="check" type="text" id="creditNumber3" name="creditNumber3" data-name="creditNumber3" maxlength="4" pattern="\d{4}"
+			    <input class="check credit_box" type="text" id="creditNumber3" name="creditNumber3" data-name="creditNumber3" maxlength="4" pattern="\d{4}"
 			           th:value="${#strings.substring(info.creditNumber, 8, 12)}" /> -
-			    <input class="check" type="text" id="creditNumber4" name="creditNumber4" data-name="creditNumber4" maxlength="4" pattern="\d{4}"
+			    <input class="check credit_box" type="text" id="creditNumber4" name="creditNumber4" data-name="creditNumber4" maxlength="4" pattern="\d{4}"
 			           th:value="${#strings.substring(info.creditNumber, 12, 16)}" />
 			  </div>
 		    </div>
 	
-		    <div class="section">
-		      <button type="submit" form="editForm" id="submit">保存する</button>
-		    </div>
+			<div class="flex">
+		      <button class="submit_btn" type="submit" form="editForm" id="submit">保存する</button>
+			</div>
 		
 
 	<!-- 提交表单包裹所有输入 -->
@@ -144,6 +144,8 @@
 	<footer>
 		<div>@TEAM2,Inc.</div>
 	</footer>
+	
+	<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="script.js" th:src="@{/script.js}"></script>

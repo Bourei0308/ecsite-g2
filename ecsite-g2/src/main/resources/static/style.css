@@ -177,7 +177,7 @@ body {
       }
       .info-label {
 		width: 75px;
-		background: black;
+		background: #787676;
 		font-weight: bold;
 		font-size: small;
 		color: white;
@@ -220,3 +220,48 @@ body {
 	  		background-color: #efefef;
 	  		margin-top: 75px;
 	  	}
+		
+		.loginBox {
+		        background-color: #efefef;
+		        width: 400px;
+		        margin: 0 auto 20px;
+		        padding: 30px 25px;
+		        border-radius: 6px;
+		        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+		    }
+			
+		.signBox {
+		        background-color: #efefef;
+		        width: 400px;
+		        margin: 0 auto 20px;
+		        padding: 30px 25px;
+		        border-radius: 6px;
+		        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+		    }
+			
+		
+.credit_box {
+	width: 50px;
+}
+
+.submit_btn{
+	width: 600px;
+    background-color: rgb(123 170 221);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+	
+.submit_btn:hover {
+	    background-color: rgb(150, 187, 228);
+	}
+	
+.flex{
+	    display: flex;
+	    justify-content: center;
+}

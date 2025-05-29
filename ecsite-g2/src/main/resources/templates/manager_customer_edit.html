@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <title>顧客編集</title>
     <link rel="stylesheet" th:href="@{/Manager_style.css}">
+	<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
 </head>
 <body>
 
-    <div class="header">
-        <div class="left">
-            <div class="logo"></div>
-            <div class="header-title">顧客編集</div>
-        </div>
-        <div class="logout-link">
-            <a href="#" onclick="return confirmLogout();">ログアウト</a>
-        </div>
-    </div>
+	<header>
+		<div class="mp_header">
+			<div class="sidebar_btn"></div>
+			<div class="header_title">顧客一覧</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
+			
+		</div>
+	</header>
 
     <div class="section">
         <form th:action="@{'/manager/customer/edit/' + ${user.ID}}" method="post"
@@ -57,7 +59,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
-                <button type="submit">保存</button>
+                <button type="submit" class="submit_btn">保存</button>
             </div>
         </form>
     </div>
@@ -65,9 +67,29 @@
     <div style="text-align: center; margin-top: 20px;">
         <a href="/manager/customerlist">← 一覧に戻る</a>
     </div>
+	
+	
+	<!-- カバー -->
+		  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+		  <!-- サイドバー -->
+		  <div class="sidebar" id="sidebar">
+		  			<button class="info-check">情報確認</button>
+		  			<form th:action="@{/mypage/edit}" method="post">
+		  			  <button type="submit" class="info-check">情報編集</button>
+		  			</form>
+		  			
+		  			<!-- 管理者専用 -->
+		  			<button type="submit" class="info-check current">顧客一覧</button>
+		  		  </div>
+	
 	<footer>
 		<div>@TEAM2,Inc.</div>
 	</footer>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		  <script src="script.js" th:src="@{/script.js}"></script>
     <script>
         function confirmLogout() {
             if (confirm("ログアウトしますか？")) {

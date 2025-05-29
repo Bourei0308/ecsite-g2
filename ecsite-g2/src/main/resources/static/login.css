@@ -32,14 +32,6 @@ body {
 		background-color: white;
 	}
 
-    form {
-        background-color: #efefef;
-        max-width: 400px;
-        margin: 0 auto 20px;
-        padding: 30px 25px;
-        border-radius: 6px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
 
     form div {
         font-size: 20px;
