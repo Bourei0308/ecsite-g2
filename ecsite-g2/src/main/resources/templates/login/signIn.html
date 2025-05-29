@@ -23,8 +23,6 @@
 			<p>パスワード<br><input type="password" th:field="*{password}"></p>
 			<div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">エラー</div>
 			<p>もう一度パスワードを入力してください<br><input type="password" name="confirmPassword"></p>
-			<p>管理者権限<br><input type="checkbox" th:field="*{adminFlag}"></p>
-			<div th:if="${#fields.hasErrors('adminFlag')}"  th:errors="*{adminFlag}">エラー</div>
 			<p>メールアドレス<br><input type="text" th:field="*{email}"></p>
 			<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}">エラー</div>
 			<p>携帯電話番号<br><input type="text" th:field="*{phone_number}"></p>
