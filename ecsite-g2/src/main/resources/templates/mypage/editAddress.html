@@ -15,7 +15,7 @@
 		</header>
 		
 		<!-- 住所情報 -->
-				    <div class="section">
+				    <div class="section" style="margin-top: 120px;">
 				      <div class="section-title">住所</div>
 					  <div class="info-item">
 					    <label class="info-label" for="postNumber1">郵便番号</label>
@@ -41,6 +41,17 @@
 				        <input class="check" type="text" id="address4" name="address4" data-name="address4" th:value="${info.address4}" />
 				      </div>
 				    </div>
+			
+			<div class="flex" style="margin-top: 40px;">
+			<form th:action="@{/mypage/updateAddress}" method="post">
+				<button class="submit_btn" type="submit" form="editForm" id="submit">保存する</button>
+			</form>
+			</div>
+			<div class="flex">
+			<form th:action="@{/mypage}" method="post">
+				<button class="submit_btn" type="submit">戻る</button>
+			</form>
+			</div>
 			
 		
 		<!-- カバー -->
