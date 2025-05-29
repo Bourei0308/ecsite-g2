@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>住所追加</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
+	</head>
+
+	<body>
+		<header>
+			<div class="mp_header">
+				<div class="sidebar_btn">三</div>
+				<div class="header_title">新しいお届け先住所を入力</div>
+			</div>
+		</header>
+		
+		<!-- カバー -->
+		<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+		<!-- サイドバー -->
+		<div class="sidebar" id="sidebar">
+			<button class="current info-check">情報確認</button>
+			<form th:action="@{/mypage/edit}" method="post">
+				<button type="submit" class="info-check">情報編集</button>
+			</form>
+						
+		<!-- 管理者専用 -->
+		<form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
+			<button type="submit" class="info-check">顧客一覧</button>
+		</form>
+		</div>
+					  
+		<footer>
+			<div>@TEAM2,Inc.</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="script.js" th:src="@{/script.js}"></script>
+		
+	</body>
+</html>

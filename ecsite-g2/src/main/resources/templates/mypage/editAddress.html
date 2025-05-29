@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>住所編集</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
+	</head>
+
+	<body>
+		<header>
+			<div class="mp_header">
+				<div class="sidebar_btn">三</div>
+				<div class="header_title">お届け先住所を編集</div>
+			</div>
+		</header>
+		
+		<!-- 住所情報 -->
+				    <div class="section">
+				      <div class="section-title">住所</div>
+					  <div class="info-item">
+					    <label class="info-label" for="postNumber1">郵便番号</label>
+					    <input class="check" type="text" id="postNumber1" name="postNumber1" data-name="postNumber1" maxlength="3" pattern="\d{3}" 
+					           th:value="${#strings.substring(info.postNumber, 0, 3)}" /> -
+					    <input class="check" type="text" id="postNumber2" name="postNumber2" data-name="postNumber2" maxlength="4" pattern="\d{4}" 
+					           th:value="${#strings.substring(info.postNumber, 3, 7)}" />
+					  </div>
+				      <div class="info-item">
+				        <label class="info-label" for="address1">住所1</label>
+				        <input class="check" type="text" id="address1" name="address1" data-name="address1" th:value="${info.address1}" />
+				      </div>
+				      <div class="info-item">
+				        <label class="info-label" for="address2">住所2</label>
+				        <input class="check" type="text" id="address2" name="address2" data-name="address2" th:value="${info.address2}" />
+				      </div>
+				      <div class="info-item">
+				        <label class="info-label" for="address3">住所3</label>
+				        <input class="check" type="text" id="address3" name="address3" data-name="address3" th:value="${info.address3}" />
+				      </div>
+				      <div class="info-item">
+				        <label class="info-label" for="address4">住所4</label>
+				        <input class="check" type="text" id="address4" name="address4" data-name="address4" th:value="${info.address4}" />
+				      </div>
+				    </div>
+			
+		
+		<!-- カバー -->
+		<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+		<!-- サイドバー -->
+		<div class="sidebar" id="sidebar">
+			<button class="current info-check">情報確認</button>
+			<form th:action="@{/mypage/edit}" method="post">
+				<button type="submit" class="info-check">情報編集</button>
+			</form>
+				
+		<!-- 管理者専用 -->
+		<form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
+			<button type="submit" class="info-check">顧客一覧</button>
+		</form>
+		</div>
+			  
+		<footer>
+			<div>@TEAM2,Inc.</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="script.js" th:src="@{/script.js}"></script>
+		
+	</body>
+</html>
