@@ -88,11 +88,33 @@ public class ManagerController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); 
-        return "redirect:/login"; 
+        return "redirect:/login/temp"; 
     }
     @GetMapping("/no-permission")
     public String noPermission() {
         return "no_permission";
+    }
+ // GET: 登录页面显示
+    @GetMapping("/login/temp")
+    public String showLoginTempPage() {
+        return "login_temp";
+    }
+
+    @PostMapping("/login/temp")
+    public String loginTemp(@RequestParam String nickName,
+                            @RequestParam String password,
+                            HttpSession session,
+                            Model model) {
+
+        SiteUser user = dao.findUserByNickAndPassword(nickName, password);
+
+        if (user == null || !Boolean.TRUE.equals(user.getAdminFlag())) {
+            model.addAttribute("error", "ユーザー名またはパスワードが正しくないか、管理者権限がありません。");
+            return "login_temp"; 
+        }
+
+        session.setAttribute("su", user);
+        return "redirect:/manager/customerlist"; 
     }
 
 }
