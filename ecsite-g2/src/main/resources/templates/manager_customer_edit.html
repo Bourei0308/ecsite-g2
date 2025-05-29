@@ -1,41 +1,79 @@
-<form th:action="@{'/manager/customer/edit/' + ${user.ID}}" method="post"
-      onsubmit="return confirm('この内容で保存してもよろしいですか？');">
-    <table>
-        <tr>
-            <th>ID</th>
-            <td th:text="${user.ID}"></td>
-        </tr>
-        <tr>
-            <th>パスワード</th>
-            <td><input type="text" name="password" th:value="${user.password}" /></td>
-        </tr>
-        <tr>
-            <th>ニックネーム</th>
-            <td><input type="text" name="nickName" th:value="${user.nickName}" /></td>
-        </tr>
-        <tr>
-            <th>管理者フラグ</th>
-            <td>
-                <input type="checkbox" name="adminFlag" th:checked="${user.adminFlag}" />
-                <label>管理者</label>
-            </td>
-        </tr>
-        <tr>
-            <th>削除フラグ</th>
-            <td>
-                <input type="checkbox" name="deleteFlag" th:checked="${user.deleteFlag}" />
-                <label>削除扱い</label>
-            </td>
-        </tr>
-        <tr>
-            <th>メールアドレス</th>
-            <td><input type="email" name="email" th:value="${user.email}" /></td>
-        </tr>
-        <tr>
-            <th>電話番号</th>
-            <td><input type="text" name="phone_number" th:value="${user.phone_number}" /></td>
-        </tr>
-    </table>
-    <button type="submit">保存</button>
-</form>
-<a href="/manager/customerlist">← 一覧に戻る</a>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>顧客編集</title>
+    <link rel="stylesheet" th:href="@{/Manager_style.css}">
+</head>
+<body>
+
+    <div class="header">
+        <div class="left">
+            <div class="logo"></div>
+            <div class="header-title">顧客編集</div>
+        </div>
+        <div class="logout-link">
+            <a href="#" onclick="return confirmLogout();">ログアウト</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <form th:action="@{'/manager/customer/edit/' + ${user.ID}}" method="post"
+              onsubmit="return confirm('この内容で保存してもよろしいですか？');">
+
+            <div class="item-row">
+                <div class="label">ID</div>
+                <div class="value" th:text="${user.ID}"></div>
+            </div>
+
+            <div class="item-row">
+                <div class="label">パスワード</div>
+                <input type="text" name="password" th:value="${user.password}">
+            </div>
+
+            <div class="item-row">
+                <div class="label">ニックネーム</div>
+                <input type="text" name="nickName" th:value="${user.nickName}">
+            </div>
+
+            <div class="item-row">
+                <div class="label">管理者フラグ</div>
+                <label><input type="checkbox" name="adminFlag" th:checked="${user.adminFlag}"> 管理者</label>
+            </div>
+
+            <div class="item-row">
+                <div class="label">削除フラグ</div>
+                <label><input type="checkbox" name="deleteFlag" th:checked="${user.deleteFlag}"> 削除扱い</label>
+            </div>
+
+            <div class="item-row">
+                <div class="label">メールアドレス</div>
+                <input type="email" name="email" th:value="${user.email}">
+            </div>
+
+            <div class="item-row">
+                <div class="label">電話番号</div>
+                <input type="text" name="phone_number" th:value="${user.phone_number}">
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit">保存</button>
+            </div>
+        </form>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/manager/customerlist">← 一覧に戻る</a>
+    </div>
+
+    <script>
+        function confirmLogout() {
+            if (confirm("ログアウトしますか？")) {
+                window.location.href = "/logout";
+            }
+            return false;
+        }
+    </script>
+
+</body>
+</html>

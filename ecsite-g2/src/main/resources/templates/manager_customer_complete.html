@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>操作完了</title>
+    <link rel="stylesheet" th:href="@{/Manager_style.css}">
 </head>
-
 <body>
-    <h1>操作が終わりました。</h1>
-    <a href="" th:href=@{/manager/customerlist} target="_blank">顧客一覧画面へ</a>
+
+    <div class="header">
+        <div class="left">
+            <div class="logo"></div>
+            <div class="header-title">完了画面</div>
+        </div>
+        <div class="logout-link">
+            <a href="#" onclick="return confirmLogout();">ログアウト</a>
+        </div>
+    </div>
+
+    <div class="section" style="text-align: center;">
+        <h2 class="page-title">操作が完了しました。</h2>
+        <a th:href="@{/manager/customerlist}" class="button-link">顧客一覧画面へ</a>
+    </div>
+
+    <script>
+        function confirmLogout() {
+            if (confirm("ログアウトしますか？")) {
+                window.location.href = "/logout";
+            }
+            return false;
+        }
+    </script>
 
 </body>
-
-
 </html>

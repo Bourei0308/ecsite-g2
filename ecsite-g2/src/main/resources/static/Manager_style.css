@@ -1,0 +1,207 @@
+/* ===== 共通設定 ===== */
+body {
+    background: #f4f4f4;
+    font-family: "メイリオ", Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== ヘッダー ===== */
+.header {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 12px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.header .left {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    margin-right: 10px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logout-link {
+    font-size: 14px;
+}
+
+.logout-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.logout-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ログイン画面用スタイル ===== */
+.login-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+h2.title {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    padding: 10px;
+    border: 2px solid #4CAF50;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #4CAF50;
+    background-color: #f0fff4;
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a047;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* ===== 顧客詳細画面 ===== */
+.section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    border-left: 5px solid #4CAF50;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.item-row {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.item-row .label {
+    width: 130px;
+    font-weight: bold;
+    color: #333;
+}
+
+.item-row .value {
+    flex: 1;
+    color: #000;
+}
+
+/* ===== 顧客一覧テーブル ===== */
+.page-title {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.table-wrapper {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.customer-table th,
+.customer-table td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+.customer-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.customer-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.customer-table a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.customer-table a:hover {
+    text-decoration: underline;
+}
+
+/* 汎用ボタンリンクスタイル */
+.button-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 24px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #45a047;
+}
