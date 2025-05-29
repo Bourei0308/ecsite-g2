@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -43,13 +44,21 @@ public class UserInfoDao {
     // 取得
     public SiteUserInfo getById(int id) {
         String sql = "SELECT * FROM SiteUserInfo WHERE ID = ?";
-        System.out.println("Executing SQL: " + sql + ", with ID=" + id);
-        return jdbc.queryForObject(sql, mapper, id);
+        try {
+            return jdbc.queryForObject(sql, mapper, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     // 更新
  // 更新整个对象（ID必须存在）
     public void update(SiteUserInfo info) {
+    	if(getById(info.getID())==null) {
+    		insert(info);
+    		return;
+    	};
+    	
         String sql = "UPDATE SiteUserInfo SET " +
                 "gender = ?, " +
                 "postNumber = ?, " +

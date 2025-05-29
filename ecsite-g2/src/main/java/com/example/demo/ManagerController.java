@@ -109,7 +109,7 @@ public class ManagerController {
 
     // ==== セッション確認 ====
     private boolean isLoggedIn(HttpSession session) {
-        SiteUser user = (SiteUser) session.getAttribute("loginUser");
+        SiteUser user = (SiteUser) session.getAttribute("su");
         return user != null && Boolean.TRUE.equals(user.getAdminFlag());
     }
     @GetMapping("/logout")

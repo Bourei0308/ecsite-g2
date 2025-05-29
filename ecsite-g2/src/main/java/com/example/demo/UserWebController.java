@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,7 @@ public class UserWebController {
 	}
 
 	//ログイン画面
-	@RequestMapping("/index")
+	@RequestMapping("/login")
 	public String index(Model model) {
 		List<SiteUser> userList = dao.getAllUsers();
 
@@ -88,12 +90,13 @@ public class UserWebController {
 
 	//ログイン機能
 	@PostMapping("/login")
-	public String login(@ModelAttribute("su") SiteUser su, Model model) {
-		SiteUser user = dao.findUserByPhoneOrEmailAndPassword(su.getPhone_number(), su.getPassword());
+	public String login(@ModelAttribute("su") SiteUser su, Model model,HttpSession session) {
+		su = dao.findUserByPhoneOrEmailAndPassword(su.getPhone_number(), su.getPassword());
 
-		if (user != null) {
-			model.addAttribute("user", user); // 必要に応じてセッション管理
-			return "mypage"; // mypage.html に遷移
+		if (su != null) {
+			model.addAttribute("su", su); // 必要に応じてセッション管理
+			session.setAttribute("su", su); // 必要に応じてセッション管理
+			return "redirect:/mypage"; // mypage.html に遷移
 		} else {
 			model.addAttribute("error", "ログイン情報が正しくありません");
 			return "index";

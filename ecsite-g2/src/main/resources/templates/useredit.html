@@ -10,6 +10,10 @@
 		<div class="mp_header">
 			<div class="sidebar_btn"></div>
 			<div class="header_title">マイページ - 情報編集</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
+			
 		</div>
 	</header>
 	
@@ -45,6 +49,16 @@
 		        <label class="info-label" for="birthday">誕生日</label>
 		        <input type="date" id="birthday" name="birthday" th:value="${info.birthday}" />
 		      </div>
+			  
+			  <div class="info-item">
+  	  	        <div class="info-label">メール</div>
+  	  	        <input class="check" type="text" id="email" data-name="email" name="email" th:value="${su.email}">
+  	  	      </div>
+						  
+			  <div class="info-item">
+  	  	        <div class="info-label">電話番号</div>
+  	  	        <input class="check" type="text" id="phone_number" data-name="phone_number" name="phone_number" th:value="${su.phone_number}">
+  	  	      </div>
 		    </div>
 	
 		    <!-- 氏名情報 -->
@@ -121,9 +135,18 @@
 		  <button type="submit" class="info-check">情報確認</button>
 		</form>
 		<button class="current info-check">情報編集</button>
+		<!-- 管理者専用 -->
+		  <form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
+		    <button type="submit" class="info-check">顧客一覧</button>
+		  </form>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="script.js" th:src="@{/script.js}"></script>
+	<script>
+		$(function () {
+		    toggleSubmitButton();
+		});
+	</script>
 </body>
 </html>

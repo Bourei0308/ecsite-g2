@@ -121,6 +121,16 @@ function check(field, str){
             b = /^\d{4}$/.test(str);
             errMsg = b ? "" : "4桁の数字を入力してください";
             break;
+			
+		case "email":
+            b = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+            errMsg = b ? "" : "正しいメールアドレスを入力してください";
+            break;
+
+        case "phone_number":
+            b = /^\d{10,11}$/.test(str); // 例：09012345678 或 0312345678
+            errMsg = b ? "" : "10〜11桁の数字を入力してください";
+            break;
 
         default:
             b = true;
@@ -145,6 +155,11 @@ function toggleSubmitButton() {
             return false; // break out of .each
         }
     });
+	
+	// 检查 gender 是否有选中
+    if (!$("input[name='gender']:checked").val()) {
+        allValid = false;
+    }
 
     $("#submit").prop("disabled", !allValid);
 }
