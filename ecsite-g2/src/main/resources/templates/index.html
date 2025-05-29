@@ -14,6 +14,7 @@
 		</header>
 		
 		<main>
+			<div class="text" th:text="${complete}"></div>
 			<div class="loginBox">
 				<form method="post" th:action="@{/login}" th:object="${su}">
 					<div>ログイン</div>

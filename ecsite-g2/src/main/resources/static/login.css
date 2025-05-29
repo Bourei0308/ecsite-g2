@@ -40,6 +40,13 @@ body {
 		text-align: center;
     }
 	
+	.text{
+		font-size: 15px;
+		margin-bottom: 10px;
+		text-align: center;
+		color: #0a476c;
+	}
+	
 	.text2{
 		font-size: 20px;
 		margin-bottom: 10px;

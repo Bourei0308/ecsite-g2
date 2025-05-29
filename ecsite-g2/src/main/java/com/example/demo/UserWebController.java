@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.Dao;
 import com.example.demo.user.Check;
@@ -31,9 +32,9 @@ public class UserWebController {
 
 	//ログイン画面
 	@RequestMapping("/login")
-	public String index(SiteUser su, Model model,HttpSession session) {
-		su = (SiteUser)session.getAttribute("su");
-		if(su!=null) {
+	public String index(SiteUser su, Model model, HttpSession session) {
+		su = (SiteUser) session.getAttribute("su");
+		if (su != null) {
 			session.removeAttribute("su");
 		}
 
@@ -77,9 +78,10 @@ public class UserWebController {
 
 	//完了画面
 	@RequestMapping("/complete")
-	public String complete(Model model, SiteUser su) {
+	public String complete(RedirectAttributes redirectAttributes, SiteUser su, HttpSession session) {
 		dao.insertUser(su);
-		return "login/complete";
+		redirectAttributes.addFlashAttribute("complete", "新規アカウントを登録しました。");
+		return "redirect:/login";
 	}
 
 	//サインイン機能
@@ -91,10 +93,10 @@ public class UserWebController {
 
 	//ログイン機能
 	@PostMapping("/login")
-	public String login(@ModelAttribute("su") SiteUser su, Model model,HttpSession session) {
-		
+	public String login(@ModelAttribute("su") SiteUser su, Model model, HttpSession session) {
+
 		su = dao.findUserByPhoneOrEmailAndPassword(su.getPhone_number(), su.getPassword());
-		
+
 		if (su != null) {
 			model.addAttribute("su", su); // 必要に応じてセッション管理
 			session.setAttribute("su", su); // 必要に応じてセッション管理
