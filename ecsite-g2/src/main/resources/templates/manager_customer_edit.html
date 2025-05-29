@@ -18,7 +18,7 @@
 			
 		</div>
 	</header>
-
+<main>
     <div class="section">
         <form th:action="@{'/manager/customer/edit/' + ${user.ID}}" method="post"
               onsubmit="return confirm('この内容で保存してもよろしいですか？');">
@@ -63,7 +63,7 @@
             </div>
         </form>
     </div>
-
+</main>
     <div style="text-align: center; margin-top: 20px;">
         <a href="/manager/customerlist">← 一覧に戻る</a>
     </div>
@@ -74,7 +74,9 @@
 
 		  <!-- サイドバー -->
 		  <div class="sidebar" id="sidebar">
-		  			<button class="info-check">情報確認</button>
+			<form th:action="@{/mypage}" method="post">
+			  <button type="submit" class="info-check">情報確認</button>
+			</form>
 		  			<form th:action="@{/mypage/edit}" method="post">
 		  			  <button type="submit" class="info-check">情報編集</button>
 		  			</form>

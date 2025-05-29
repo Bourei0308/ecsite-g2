@@ -54,7 +54,10 @@
 
 		  <!-- サイドバー -->
 		  <div class="sidebar" id="sidebar">
-			<button class="info-check">情報確認</button>
+			<form th:action="@{/mypage}" method="post">
+			  <button type="submit" class="info-check">情報確認</button>
+			</form>
+						
 			<form th:action="@{/mypage/edit}" method="post">
 			  <button type="submit" class="info-check">情報編集</button>
 			</form>

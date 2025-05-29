@@ -60,6 +60,7 @@ $(document).on("input", ".check", function() {
     let $warning = $input.parent().find(".input-warning");
     if (!$warning.length) {
         $warning = $('<div class="input-warning"></div>');
+		$input.parent().css("position", "relative");
         $input.parent().append($warning);
     }
 
@@ -75,8 +76,6 @@ $(document).on("input", ".check", function() {
         $input.css("background-color", "");
         $warning.removeClass("show");
     }
-	
-	toggleSubmitButton();
 });
 
 function check(field, str){
@@ -131,6 +130,23 @@ function check(field, str){
             b = /^\d{10,11}$/.test(str); // 例：09012345678 或 0312345678
             errMsg = b ? "" : "10〜11桁の数字を入力してください";
             break;
+			
+		case "password":
+            b = str.length > 0;
+            errMsg = b ? "" : "パスワードを入力してください";
+            break;
+
+        case "confirmPassword":
+            const password = $("input[data-name='password']").val();
+            b = str.length > 0 && str === password;
+            if (str.length === 0) {
+                errMsg = "確認用パスワードを入力してください";
+            } else if (str !== password) {
+                errMsg = "パスワードが一致しません";
+            } else {
+                errMsg = "";
+            }
+            break;
 
         default:
             b = true;
@@ -140,26 +156,4 @@ function check(field, str){
     return [b, errMsg];
 }
 
-// 控制提交按钮是否禁用
-function toggleSubmitButton() {
-    let allValid = true;
-    $(".check").each(function () {
-        const $input = $(this);
-        const field = $input.data("name");
-        if (!field) return;
 
-        const val = $input.val().trim();
-        const [isValid] = check(field, val);
-        if (!isValid) {
-            allValid = false;
-            return false; // break out of .each
-        }
-    });
-	
-	// 检查 gender 是否有选中
-    if (!$("input[name='gender']:checked").val()) {
-        allValid = false;
-    }
-
-    $("#submit").prop("disabled", !allValid);
-}

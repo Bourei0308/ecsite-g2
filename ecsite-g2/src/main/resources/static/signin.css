@@ -121,6 +121,14 @@ body {
 	input[type="submit"]:hover {
 	    background-color: rgb(150, 187, 228);
 	}
+	
+	input[type="submit"]:disabled {
+	    background-color: #cccccc;  /* 灰色背景 */
+	    color: #666666;             /* 浅灰色文字 */
+	    cursor: not-allowed;        /* 不允许点击的鼠标指针 */
+	    opacity: 0.7;               /* 半透明效果 */
+	}
+
 
 
     .error {

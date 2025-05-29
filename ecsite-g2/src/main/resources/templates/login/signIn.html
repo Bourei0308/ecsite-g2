@@ -30,7 +30,7 @@
 				<p class="text3">携帯電話番号　<span class="red">必須</span><input class="check" type="text" data-name="phone_number" th:field="*{phone_number}"></p>
 				<div th:if="${#fields.hasErrors('phone_number')}"  th:errors="*{phone_number}">エラー</div>
 			
-				<input type="submit" value="確認画面">
+				<input type="submit" id="submit" value="確認画面">
 			</form>
 			
 			<form action="#" method="get" th:action="@{/login}" class="form2">
@@ -42,6 +42,37 @@
 		<footer>
 			<div>@TEAM2,Inc.</div>
 		</footer>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="script.js" th:src="@{/script.js}"></script>
+		
+		<script>
+				$(function () {
+				    toggleSubmitButton();
+				});
+				
+				$(document).on("input", ".check", function() {			
+					toggleSubmitButton();
+				});
+				
+				// 控制提交按钮是否禁用
+				function toggleSubmitButton() {
+				    let allValid = true;
+				    $(".check").each(function () {
+				        const $input = $(this);
+				        const field = $input.data("name");
+				        if (!field) return;
+
+				        const val = $input.val().trim();
+				        const [isValid] = check(field, val);
+				        if (!isValid) {
+				            allValid = false;
+				            return false; // break out of .each
+				        }
+				    });
+
+				    $("#submit").prop("disabled", !allValid);
+				}
+			</script>
 	 </body>
 
   </html>
