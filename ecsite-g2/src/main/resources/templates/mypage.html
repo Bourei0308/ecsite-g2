@@ -80,6 +80,12 @@
 	        <div class="info-label">住所4</div>
 	        <div class="info-value" th:text="${info.address4}"></div>
 	      </div>
+		  <form th:action="@{/mypage/addAddress}" method="post">
+		  	<button type="submit">新しいお届け先住所を追加する</button>
+		  </form>
+		  <form th:action="@{/mypage/editAddress}" method="post">
+		  	<button type="submit">住所編集</button>
+		  </form>
 	    </div>
 
 	    <!-- その他情報 -->
