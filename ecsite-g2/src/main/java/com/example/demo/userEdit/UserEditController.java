@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.Dao;
+import com.example.demo.user.AddressDao;
 import com.example.demo.user.SiteUser;
+import com.example.demo.user.SiteUserAddress;
 import com.example.demo.user.SiteUserInfo;
 
 @Controller
 public class UserEditController {
 	private final UserInfoDao infodb;
 	private final Dao db;
+	private final AddressDao addressdb;
 
-	public UserEditController(UserInfoDao infodb, Dao db) {
+	public UserEditController(UserInfoDao infodb, Dao db,AddressDao addressdb) {
 		this.db = db;
 		this.infodb = infodb;
+		this.addressdb = addressdb;
 	}
 
 	@RequestMapping("/mypage")
@@ -98,12 +102,12 @@ public class UserEditController {
 	}
 
 	@RequestMapping("/mypage/addAddress")
-	public String addAddress(Model model, SiteUser su, SiteUserInfo info, HttpSession session) {
+	public String addAddress(Model model, SiteUser su, SiteUserInfo info, SiteUserAddress address, HttpSession session) {
 		return "mypage/addAddress";
 	}
 
 	@RequestMapping("/mypage/editAddress")
-	public String editAddress(Model model, SiteUser su, SiteUserInfo info, HttpSession session) {
+	public String editAddress(Model model, SiteUser su, SiteUserInfo info, SiteUserAddress address, HttpSession session) {
 
 		su = (SiteUser) session.getAttribute("su");
 		info = (SiteUserInfo) session.getAttribute("info");
