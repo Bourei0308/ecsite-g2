@@ -1,0 +1,119 @@
+body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+	
+	h2{
+		font-size: 25px;
+		margin-bottom: 60px;
+		font-weight: bold;
+		margin-left: 20px;
+	}
+	
+
+    header {
+        background-color: #efefef;
+        padding: 15px 20px;
+        text-align: left;
+    }
+
+    header a {
+        text-decoration: none;
+        color: #111;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+	
+	main{
+		margin-top: 75px;
+		background-color: white;
+	}
+
+    form {
+        background-color: #efefef;
+        max-width: 600px;
+        margin: 0 auto 20px;
+        padding: 30px 25px;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    form div {
+        font-size: 20px;
+        margin-bottom: 10px;
+		font-weight: bold;
+		text-align: center;
+    }
+	
+	.text2{
+		font-size: 20px;
+		margin-bottom: 10px;
+		font-weight: bold;
+		text-align: center;		
+	}
+
+    p {
+        margin: 25px;
+        font-size: 14px;
+    }
+	
+	input::placeholder {
+	  font-family: "Meiryo", sans-serif;
+	  font-weight: bold;
+	  font-size: 16px;
+	  color: #ccc;
+	}
+	
+	input[type="text"]:focus,
+	input[type="password"]:focus {
+	    outline: none;
+		border: 1px solid #00BFFF;
+	}
+
+
+
+    input[type="text"],
+    input[type="password"] {
+		width: 100%;
+		padding: 20px;
+		font-size: 14px;
+		border: 0px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        background-color: rgb(123 170 221);
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+	
+	input[type="submit"]:hover {
+	    background-color: rgb(150, 187, 228);
+	}
+
+
+    .error {
+		font-weight: 350;
+    }
+	
+	footer{
+		font-size: 12px;
+		width: 100%;
+		text-align: center;
+		font-family: 'Segoe UI', sans-serif;
+		padding: 30px 0;
+		color: rgb(128, 128, 128);
+		background-color: #efefef;
+		margin-top: 75px;
+	}
