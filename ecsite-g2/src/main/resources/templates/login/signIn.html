@@ -10,7 +10,7 @@
 	 <body>
 		
 		<header>
-			<a href="">TEAM2SITE</a>
+			<a href="">ZOOTOWN</a>
 		</header>
 				
 		<h2 class="text">新規会員登録</h2>
@@ -25,7 +25,7 @@
 				<p class="text3">パスワード　<span class="red">必須</span><input class="check" type="password" data-name="password" th:field="*{password}"></p>
 				<div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">エラー</div>
 				<p class="text3">もう一度パスワードを入力してください　<span class="red">必須</span><input class="check" type="password" name="confirmPassword" data-name="confirmPassword"></p>
-				<p class="text3">メールアドレス　<span class="red">必須</span><input class="check" type="text" data-name="email" th:field="*{email}" placeholder="例) zozo@zozotown.jp"></p>
+				<p class="text3">メールアドレス　<span class="red">必須</span><input class="check" type="text" data-name="email" th:field="*{email}" placeholder="例) zoo@zootown.jp"></p>
 				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}">エラー</div>
 				<p class="text3">携帯電話番号　<span class="red">必須</span><input class="check" type="text" data-name="phone_number" th:field="*{phone_number}"></p>
 				<div th:if="${#fields.hasErrors('phone_number')}"  th:errors="*{phone_number}">エラー</div>
