@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>アクセスエラー</title>
+</head>
+<body>
+    <p>処理中...</p>
+
     <script defer>
         if (confirm("管理者権限が必要です。ログイン画面に移動しますか？")) {
-            window.location.href = "/logintemp";
+            window.location.href = "/login/temp";
         } else {
             history.back();
         }
     </script>
-</head>
-<body>
-    <p>処理中...</p>
 </body>
 </html>
