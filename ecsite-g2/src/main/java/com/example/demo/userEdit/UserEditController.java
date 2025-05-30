@@ -1,5 +1,7 @@
 package com.example.demo.userEdit;
 
+import java.util.List;
+
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -50,10 +52,12 @@ public class UserEditController {
 			Model model, SiteUser su, SiteUserInfo info, HttpSession session) {
 		su = (SiteUser) session.getAttribute("su");
 		info = (SiteUserInfo) session.getAttribute("info");
-
+		
 		if (su == null) {
 			return "redirect:/login";
 		}
+		
+		List<SiteUserAddress> addressList=addressdb.getByUserId(su.getID());
 
 		// 放入 model
 		model.addAttribute("su", su);

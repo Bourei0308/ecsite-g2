@@ -3,6 +3,7 @@ package com.example.demo.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -39,9 +40,13 @@ public class AddressDao {
     // READ：ユーザーIDから住所一覧取得（複数）
     public List<SiteUserAddress> getByUserId(int userID) {
         String sql = "SELECT * FROM SiteUserAddress WHERE ID = ?";
-        return jdbc.query(sql,
-                new BeanPropertyRowMapper<>(SiteUserAddress.class),
-                userID);
+        try {
+        	return jdbc.query(sql,
+                    new BeanPropertyRowMapper<>(SiteUserAddress.class),
+                    userID);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     // UPDATE：addressID + ID で更新
