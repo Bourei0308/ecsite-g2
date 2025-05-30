@@ -80,8 +80,6 @@ public class UserEditController {
 			@RequestParam("email") String email,
 			@RequestParam("phone_number") String phone_number,
 
-			@RequestParam("postNumber1") String postNumber1,
-			@RequestParam("postNumber2") String postNumber2,
 
 			@RequestParam("creditNumber1") String creditNumber1,
 			@RequestParam("creditNumber2") String creditNumber2,
@@ -107,7 +105,6 @@ public class UserEditController {
 
 		// 设定 ID 给 info
 		info.setID(su.getID());
-		info.setPostNumber(Integer.parseInt(postNumber1 + postNumber2));
 		info.setCreditNumber(creditNumber1 + creditNumber2 + creditNumber3 + creditNumber4);
 
 		// 保存 SiteUserInfo
