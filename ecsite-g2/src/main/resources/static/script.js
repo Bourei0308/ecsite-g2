@@ -3,13 +3,23 @@ $(document).ready(function () {
     // 检查页面上是否有任意一个目标元素
     if ($("#info_check").length === 0 &&
         $("#info_edit").length === 0 &&
-		$("#address_add").length === 0 &&
-		$("#address_edit").length === 0 &&
+		$("#top").length === 0 &&
         $("#user_admin").length === 0) {
         return; // 什么都没有就不生成
     }
 
     const $sidebar = $('<div>', { class: 'sidebar', id: 'sidebar' });
+	
+	// 情報確認
+	    if ($("#top").length > 0) {
+	        $sidebar.append('<button class="current">トップページ</button>');
+	    } else {
+	        $sidebar.append(`
+	            <form method="get" action="/items">
+	                <button type="submit">トップページ</button>
+	            </form>
+	        `);
+	    }
 
     // 情報確認
     if ($("#info_check").length > 0) {

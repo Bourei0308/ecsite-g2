@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>商品詳細</title>
 	<link rel="stylesheet" th:href="@{/shop.css}">
+	<link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
     <h1 th:text="${item.name}">商品名</h1>
@@ -59,5 +60,28 @@
     </form>
 
     <p><a href="/items">＜ 商品一覧に戻る</a></p>
+	
+	
+	<header>
+		<div class="mp_header">
+			<div class="sidebar_btn">三</div>
+			<div class="header_title">マイページ</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+	  <div id="top"></div>
+	  	<script th:if="${isAdmin}" th:inline="javascript">
+	  		    window.isAdmin = true;
+	  	</script>
+	  
+	  <footer>
+	  	<div>@TEAM2,Inc.</div>
+	  </footer>
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="script.js" th:src="@{/script.js}"></script>
 </body>
 </html>
