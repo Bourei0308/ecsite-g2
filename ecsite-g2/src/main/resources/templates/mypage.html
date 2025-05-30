@@ -6,15 +6,7 @@
 <link rel="stylesheet" href="style.css" th:href="@{/style.css}" >
 </head>
 <body>
-	<header>
-		<div class="mp_header">
-			<div class="sidebar_btn">三</div>
-			<div class="header_title">マイページ</div>
-			<div class="linkBox">
-				<a th:href="@{/login}" class="logout-link">ログアウト</a>
-			</div>
-		</div>
-	</header>
+	
 	
 	<main>
 	    <!-- 基本情報 -->
@@ -94,10 +86,10 @@
 		  </form>
 		</div> <!-- section 終了 -->
 
-
-
-
 	    <!-- その他情報 -->
+		
+		
+		
 	    <div class="section">
 	      <div class="section-title">その他</div>
 	      <div class="info-item">
@@ -108,6 +100,17 @@
 	  </main>
 	
 	<!-- カバー -->
+	
+	<header>
+		<div class="mp_header">
+			<div class="sidebar_btn">三</div>
+			<div class="header_title">マイページ</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
+		</div>
+	</header>
+	
 	  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 	  <div id="info_check"></div>
 	  	<script th:if="${isAdmin}" th:inline="javascript">
