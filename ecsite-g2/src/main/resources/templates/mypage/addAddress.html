@@ -61,11 +61,6 @@
 			<script th:if="${isAdmin}" th:inline="javascript">
 				    window.isAdmin = true;
 			</script>
-						
-		<!-- 管理者専用 -->
-		<form th:if="${isAdmin}" th:action="@{/manager/customerlist}" method="get">
-			<button type="submit" class="info-check">顧客一覧</button>
-		</form>
 		</div>
 					  
 		<footer>
