@@ -2,25 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/style.css}">
     <title>購入</title>
 </head>
 <body>
     <h1>購入フォーム</h1>
 
-    <form th:action="@{/purchase/complete}" method="post" th:object="${customerOrder}">
-        <label>名前: <input type="text" th:field="*{name}" required /></label><br>
+	<form th:action="@{/purchase/complete}" method="post" th:object="${customerOrder}">
+	    
+		
+		<div class="section">
+	      <div class="section-title">氏名</div>
+	      <div class="info-item">
+	        <label class="info-label" for="lastName1">氏名（漢字）</label>
+	        <input class="check" type="text" id="lastName1" name="lastName1" data-name="lastName1" th:value="${info.lastName1}" placeholder="姓" />
+	        <input class="check" type="text" id="firstName1" name="firstName1" data-name="firstName1" th:value="${info.firstName1}" placeholder="名" />
+	      </div>
+	      <div class="info-item">
+	        <label class="info-label" for="lastName2">氏名（カナ）</label>
+	        <input class="check" type="text" id="lastName2" name="lastName2" data-name="lastName2" th:value="${info.lastName2}" placeholder="姓" />
+	        <input class="check" type="text" id="firstName2" name="firstName2" data-name="firstName2" th:value="${info.firstName2}" placeholder="名" />
+	      </div>
+		  
+		  <div class="info-item">
+  	        <label class="info-label" for="phone_number">電話番号</label>
+  	        <input class="check" type="text" th:field="*{phone_number}" required />
+  	      </div>
+		  
+		  <div class="info-item">
+	        <label class="info-label" for="creditNumber">カード番号</label>
+	        <input class="check" type="text" th:field="*{creditNumber}" required />
+	      </div>
+		  
+	    </div>
+		
+		<div class="section">
+		  <div class="section-title">住所</div>
 
-        <label>電話番号: <input type="text" th:field="*{phone_number}" required /></label><br>
+		  <form th:action="@{/purchase/selectAddress}" method="post">
+		    <div th:each="res, iterStat : ${addrList}" class="section2">
+		      <label>
+		        <input type="radio" name="selectedAddressID" th:value="${res.addressID}" th:checked="${iterStat.index == 0}" />
+		        <div class="info-label">住所<span th:text="${res.addressID}"></span></div>
+		        <div class="info-item">
+		          <div>〒</div>
+		          <div class="info-value" th:text="${res.postNumber}"></div>
+		        </div>
+		        <div class="info-item">
+		          <div class="info-value">
+		            <span th:text="${res.address1}"></span>
+		            <span th:text="${res.address2}"></span>
+		            <span th:text="${res.address3}"></span>
+		            <span th:if="${!#strings.isEmpty(res.address4)}" th:text="${res.address4}"></span>
+		          </div>
+		        </div>
+		      </label>
+		    </div>
 
-        <label>住所: <input type="text" th:field="*{address1}" required /></label><br>
+		    <button type="submit" class="submit_btn">この住所に送る</button>
+		  </form>
 
-        <label>カード番号: <input type="text" th:field="*{creditNumber}" required /></label><br>
-
-        <label><input type="checkbox" name="saveAddress" /> 住所を保存する</label><br>
-
-        <button type="submit">購入を確定</button>
-    </form>
+		  <!-- 「新しいお届け先住所を追加する」は常に表示 -->
+		  <form th:action="@{/mypage/addAddress/__${newAddressID}__}" method="post">
+		    <button type="submit" class="submit_btn">新しいお届け先住所を追加する</button>
+		  </form>
+		</div>
+	</form>
 
     <p><a href="/cart">＜ カートに戻る</a></p>
+	
+	<header>
+		<div class="mp_header">
+			<div class="sidebar_btn">三</div>
+			<div class="header_title">購買情報確認</div>
+			<div class="linkBox">
+				<a th:href="@{/login}" class="logout-link">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+	  <div id="top"></div>
+	  	<script th:if="${isAdmin}" th:inline="javascript">
+	  		    window.isAdmin = true;
+	  	</script>
+	  
+	  <footer>
+	  	<div>@TEAM2,Inc.</div>
+	  </footer>
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="script.js" th:src="@{/script.js}"></script>
+	
 </body>
 </html>
