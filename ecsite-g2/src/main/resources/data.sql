@@ -18,5 +18,5 @@ INSERT INTO SiteUserAddress (
 INSERT INTO SiteUserAddress (
   ID,addressID ,postNumber, address1, address2, address3, address4
 ) VALUES (
-  2, 2, 4040043, '山梨県', '甲州市', '塩山下於曾286-1',''
+  1, 2, 4040043, '山梨県', '甲州市', '塩山下於曾286-1',''
 );

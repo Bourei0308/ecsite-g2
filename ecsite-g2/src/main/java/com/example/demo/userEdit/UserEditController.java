@@ -48,7 +48,7 @@ public class UserEditController {
 		session.setAttribute("su", su);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true); // 添加此行
 		model.addAttribute("addressList", addressList);
-		model.addAttribute("id", 1);
+		model.addAttribute("newAddressID", addressList.size()+1);
 
 		return "mypage";
 	}
