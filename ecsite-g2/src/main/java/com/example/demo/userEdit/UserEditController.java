@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,25 +111,86 @@ public class UserEditController {
 		return "redirect:/mypage"; // 更新后跳转个人主页
 	}
 
-	@RequestMapping("/mypage/addAddress")
-	public String addAddress(Model model, SiteUser su, SiteUserInfo info, SiteUserAddress address, HttpSession session) {
-		return "mypage/addAddress";
-	}
-
-	@RequestMapping("/mypage/editAddress")
-	public String editAddress(Model model, SiteUser su, SiteUserInfo info, SiteUserAddress address, HttpSession session) {
-
+	@RequestMapping("/mypage/addAddress/{addressID}")
+	public String addAddress(Model model,@PathVariable int addressID, 
+			SiteUser su, SiteUserAddress address, HttpSession session) {
+		
 		su = (SiteUser) session.getAttribute("su");
-		info = (SiteUserInfo) session.getAttribute("info");
 
 		if (su == null) {
 			return "redirect:/login";
 		}
+		
+		address = addressdb.getByAddressIdAndUserId(su.getID(), addressID);
+		
+		if (address==null) {
+			address=new SiteUserAddress();
+		}
+		
+		address.setID(su.getID());
+		address.setAddressID(addressID);
 
 		// 放入 model
 		model.addAttribute("su", su);
-		model.addAttribute("info", info);
+		model.addAttribute("address", address);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
+		
+		session.setAttribute("address", address);
+		
+		return "mypage/addAddress";
+	}
+	
+	
+
+	@RequestMapping("/mypage/editAddress/{addressID}")
+	public String editAddress(Model model, @PathVariable int addressID, 
+			@ModelAttribute SiteUserAddress address,SiteUser su,  
+			 HttpSession session) {
+
+		su = (SiteUser) session.getAttribute("su");
+
+		if (su == null) {
+			return "redirect:/login";
+		}
+		
+		address = addressdb.getByAddressIdAndUserId(su.getID(), addressID);
+		if (address == null) {
+			return "redirect:/mypage";
+		}
+		
+		
+		// 放入 model
+		model.addAttribute("su", su);
+		model.addAttribute("address", address);
+		model.addAttribute("isAdmin", su.getAdminFlag() == true);
+		
+		session.setAttribute("address", address);
 		return "mypage/editAddress";
 	}
+	
+	@PostMapping("/mypage/editAddress/update")
+	public String insertAddress(
+			@RequestParam("postNumber1") String postNumber1,
+			@RequestParam("postNumber2") String postNumber2,
+
+			@ModelAttribute SiteUserAddress address,
+			HttpSession session) {
+
+		// 假设 session 中保存了当前登录用户
+		SiteUser su = (SiteUser) session.getAttribute("su");
+		if (su == null) {
+			return "redirect:/login"; // 未登录跳转登录页
+		}
+
+		// 设定 ID 给 info
+		address.setPostNumber(Integer.parseInt(postNumber1 + postNumber2));
+
+		// 保存 SiteUserInfo
+		addressdb.update(address);
+
+		return "redirect:/mypage"; // 更新后跳转个人主页
+	}
+	
+	
+	
 }
