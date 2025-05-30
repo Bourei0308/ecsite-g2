@@ -127,7 +127,6 @@ public class UserEditController {
 			address=new SiteUserAddress();
 		}
 		
-		address.setID(su.getID());
 		address.setAddressID(addressID);
 
 		// 放入 model
@@ -135,7 +134,44 @@ public class UserEditController {
 		model.addAttribute("address", address);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
 		
+		if (address.getPostNumber() != null) {
+		    String postNumberStr = String.format("%07d", address.getPostNumber());
+		    model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
+		    model.addAttribute("postNumber2", postNumberStr.substring(3));
+		} else {
+		    model.addAttribute("postNumber1", "");
+		    model.addAttribute("postNumber2", "");
+		}
+		
 		return "mypage/addAddress";
+	}
+	
+	@PostMapping("/mypage/addAddress/{addressID}/insert")
+	public String insertAddress(
+			@RequestParam("postNumber1") String postNumber1,
+			@RequestParam("postNumber2") String postNumber2,
+			@PathVariable int addressID,
+			@ModelAttribute SiteUserAddress address,
+			HttpSession session) {
+
+		// 假设 session 中保存了当前登录用户
+		SiteUser su = (SiteUser) session.getAttribute("su");
+		if (su == null) {
+			return "redirect:/login"; // 未登录跳转登录页
+		}
+		
+		System.out.println("PathVariable addressID: " + addressID);
+	    System.out.println("Address before setAddressID: " + address.getAddressID());
+	    
+		// 设定 ID 给 info
+		address.setID(su.getID());
+		address.setAddressID(addressID);
+		address.setPostNumber(Integer.parseInt(postNumber1 + postNumber2));
+
+		// 保存 SiteUserInfo
+		addressdb.insert(address);
+
+		return "redirect:/mypage"; // 更新后跳转个人主页
 	}
 	
 	
@@ -156,19 +192,29 @@ public class UserEditController {
 			return "redirect:/mypage";
 		}
 		
-		
+		address.setAddressID(addressID);
 		// 放入 model
 		model.addAttribute("su", su);
 		model.addAttribute("address", address);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
+		
+		if (address.getPostNumber() != null) {
+		    String postNumberStr = String.format("%07d", address.getPostNumber());
+		    model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
+		    model.addAttribute("postNumber2", postNumberStr.substring(3));
+		} else {
+		    model.addAttribute("postNumber1", "");
+		    model.addAttribute("postNumber2", "");
+		}
+		
 		return "mypage/editAddress";
 	}
 	
-	@PostMapping("/mypage/editAddress/update")
+	@PostMapping("/mypage/editAddress/{addressID}/update")
 	public String updateAddress(
 			@RequestParam("postNumber1") String postNumber1,
 			@RequestParam("postNumber2") String postNumber2,
-
+			@PathVariable int addressID,
 			@ModelAttribute SiteUserAddress address,
 			HttpSession session) {
 
@@ -177,8 +223,10 @@ public class UserEditController {
 		if (su == null) {
 			return "redirect:/login"; // 未登录跳转登录页
 		}
-		
+		System.out.println(address.getID());
 		// 设定 ID 给 info
+		address.setID(su.getID());
+		address.setAddressID(addressID);
 		address.setPostNumber(Integer.parseInt(postNumber1 + postNumber2));
 
 		// 保存 SiteUserInfo
@@ -187,29 +235,7 @@ public class UserEditController {
 		return "redirect:/mypage"; // 更新后跳转个人主页
 	}
 	
-	@PostMapping("/mypage/addAddress/insert")
-	public String insertAddress(
-			@RequestParam("postNumber1") String postNumber1,
-			@RequestParam("postNumber2") String postNumber2,
-
-			@ModelAttribute SiteUserAddress address,
-			HttpSession session) {
-
-		// 假设 session 中保存了当前登录用户
-		SiteUser su = (SiteUser) session.getAttribute("su");
-		if (su == null) {
-			return "redirect:/login"; // 未登录跳转登录页
-		}
-		
-
-		// 设定 ID 给 info
-		address.setPostNumber(Integer.parseInt(postNumber1 + postNumber2));
-
-		// 保存 SiteUserInfo
-		addressdb.insert(address);
-
-		return "redirect:/mypage"; // 更新后跳转个人主页
-	}
+	
 	
 	
 	

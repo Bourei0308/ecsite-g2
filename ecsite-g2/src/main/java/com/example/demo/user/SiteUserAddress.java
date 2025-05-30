@@ -3,7 +3,7 @@ package com.example.demo.user;
 public class SiteUserAddress {
     private int ID;                // ユーザーID
     private int addressID;        // 住所ID（AUTO_INCREMENT）
-    private int postNumber;       // 郵便番号
+    private Integer postNumber;       // 郵便番号
     private String address1;      // 都道府県など
     private String address2;      // 市区町村など
     private String address3;      // 番地など
@@ -26,11 +26,11 @@ public class SiteUserAddress {
         this.addressID = addressID;
     }
 
-    public int getPostNumber() {
+    public Integer getPostNumber() {
         return postNumber;
     }
 
-    public void setPostNumber(int postNumber) {
+    public void setPostNumber(Integer postNumber) {
         this.postNumber = postNumber;
     }
 

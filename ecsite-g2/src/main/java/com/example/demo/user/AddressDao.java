@@ -16,10 +16,11 @@ public class AddressDao {
 
     // CREATE：追加
     public void insert(SiteUserAddress address) {
-        String sql = "INSERT INTO SiteUserAddress (ID, postNumber, address1, address2, address3, address4) " +
-                     "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SiteUserAddress (ID,addressID, postNumber, address1, address2, address3, address4) " +
+                     "VALUES (?,?, ?, ?, ?, ?, ?)";
         jdbc.update(sql,
                 address.getID(),
+                address.getAddressID(),
                 address.getPostNumber(),
                 address.getAddress1(),
                 address.getAddress2(),
