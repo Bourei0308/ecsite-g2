@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>購入</title>
+</head>
+<body>
+    <h1>購入フォーム</h1>
+
+    <form th:action="@{/purchase/complete}" method="post" th:object="${customerOrder}">
+        <label>名前: <input type="text" th:field="*{name}" required /></label><br>
+
+        <label>電話番号: <input type="text" th:field="*{phone_number}" required /></label><br>
+
+        <label>住所: <input type="text" th:field="*{address1}" required /></label><br>
+
+        <label>カード番号: <input type="text" th:field="*{creditNumber}" required /></label><br>
+
+        <label><input type="checkbox" name="saveAddress" /> 住所を保存する</label><br>
+
+        <button type="submit">購入を確定</button>
+    </form>
+
+    <p><a href="/cart">＜ カートに戻る</a></p>
+</body>
+</html>

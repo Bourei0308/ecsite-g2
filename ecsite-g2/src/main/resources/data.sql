@@ -15,3 +15,9 @@ INSERT INTO SiteUserAddress (
 ) VALUES (
   1, 1, 1900013, '1', '1', '1', '1'
 );
+
+INSERT INTO item (name, price, stock, image, sizes) VALUES 
+('うたかたの月下美人（グレー）', 15000, 10, 'gray.png', 'S, M'),
+('水彩絢爛（ピンク）', 15000, 5, 'pink.png', 'S, M'),
+('はんなり夕涼み（黄色）', 15000, 8, 'yellow.png', 'S, M'),
+('涼風の燦々しらべ（水色）', 18000, 3, 'blue.png', 'S, M');
