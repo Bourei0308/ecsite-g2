@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>購入完了</title>
+	<link rel="stylesheet" th:href="@{/shop.css}">
+		<link rel="stylesheet" th:href="@{/style.css}">
+		<style>
+		.linkBox {
+		    text-align: center;
+		}
+		
+		</style>
 </head>
 <body>
+
     <h1>ご購入ありがとうございます</h1>
 
-    <p th:text="${message}">購入が完了しました。</p>
+<!--    <p th:text="${message}">購入が完了しました。</p>-->
 
     <p>
-        <a href="/items">＞ 商品一覧に戻る</a>
+        <a href="/items"class="submit_btn"> 商品一覧に戻る</a>
     </p>
+	
+	
+	<header>
+			<div class="mp_header">
+				<div class="sidebar_btn">三</div>
+				<div class="header_title">ZOOTOWN</div>
+				<div class="linkBox">
+					<a th:href="@{/login}" class="logout-link">ログアウト</a>
+				</div>
+			</div>
+		</header>
+
+		  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+		  <div id="top"></div>
+		  	<script th:if="${isAdmin}" th:inline="javascript">
+		  		    window.isAdmin = true;
+		  	</script>
+		  
+		  <footer>
+		  	<div>@TEAM2,Inc.</div>
+		  </footer>
+		  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		  <script src="script.js" th:src="@{/script.js}"></script>
 </body>
 </html>
