@@ -12,11 +12,5 @@ INSERT INTO SiteUserInfo (
 INSERT INTO SiteUserAddress (
   ID,addressID ,postNumber, address1, address2, address3, address4
 ) VALUES (
-  1, 1, 1900013, '東京都', '立川市', '富士見町5-6-19', 'ニュー諏訪の台コーポ303'
-);
-
-INSERT INTO SiteUserAddress (
-  ID,addressID ,postNumber, address1, address2, address3, address4
-) VALUES (
-  1, 2, 4040043, '山梨県', '甲州市', '塩山下於曾286-1',''
+  1, 1, 1900013, '1', '1', '1', '1'
 );
