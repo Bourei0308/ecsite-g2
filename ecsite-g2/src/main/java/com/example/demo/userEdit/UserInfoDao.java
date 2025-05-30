@@ -22,16 +22,11 @@ public class UserInfoDao {
 
     // 追加
     public void insert(SiteUserInfo info) {
-        String sql = "INSERT INTO SiteUserInfo (ID, gender, postNumber, address1, address2, address3, address4, creditNumber, birthday, firstName1, lastName1, firstName2, lastName2) " +
+        String sql = "INSERT INTO SiteUserInfo (ID, gender, creditNumber, birthday, firstName1, lastName1, firstName2, lastName2) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbc.update(sql,
             info.getID(),
             info.getGender(),
-            info.getPostNumber(),
-            info.getAddress1(),
-            info.getAddress2(),
-            info.getAddress3(),
-            info.getAddress4(),
             info.getCreditNumber(),
             info.getBirthday(),
             info.getFirstName1(),
@@ -61,11 +56,6 @@ public class UserInfoDao {
     	
         String sql = "UPDATE SiteUserInfo SET " +
                 "gender = ?, " +
-                "postNumber = ?, " +
-                "address1 = ?, " +
-                "address2 = ?, " +
-                "address3 = ?, " +
-                "address4 = ?, " +
                 "creditNumber = ?, " +
                 "birthday = ?, " +
                 "firstName1 = ?, " +
@@ -76,11 +66,6 @@ public class UserInfoDao {
 
         jdbc.update(sql,
             info.getGender(),
-            info.getPostNumber(),
-            info.getAddress1(),
-            info.getAddress2(),
-            info.getAddress3(),
-            info.getAddress4(),
             info.getCreditNumber(),
             info.getBirthday(),
             info.getFirstName1(),
@@ -111,11 +96,6 @@ public class UserInfoDao {
             SiteUserInfo info = new SiteUserInfo();
             info.setID(rs.getInt("ID"));
             info.setGender(rs.getString("gender"));
-            info.setPostNumber(rs.getInt("postNumber"));
-            info.setAddress1(rs.getString("address1"));
-            info.setAddress2(rs.getString("address2"));
-            info.setAddress3(rs.getString("address3"));
-            info.setAddress4(rs.getString("address4"));
             info.setCreditNumber(rs.getString("creditNumber"));
             info.setBirthday(rs.getString("birthday")); // 型注意：必要なら java.sql.Date に変えてください
             info.setFirstName1(rs.getString("firstName1"));
