@@ -62,6 +62,7 @@ public class UserEditController {
 		// 放入 model
 		model.addAttribute("su", su);
 		model.addAttribute("info", info);
+		model.addAttribute("addressList", addressList);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
 
 		return "useredit";
