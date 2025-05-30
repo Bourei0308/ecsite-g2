@@ -215,8 +215,14 @@ body {
 	  }
 	  
 	  .linkBox {
-	      margin-left: auto;
+	      margin-left: 800px;
 	      padding-right: 10px;
+	  }
+	  
+	  linkBox2{
+		margin-left: 900px;
+		padding-right: 10px;
+		
 	  }
 	  
 	  footer{
@@ -263,6 +269,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     margin-top: 15px;
+	text-align: center;
 }
 
 .submit_btn:disabled {

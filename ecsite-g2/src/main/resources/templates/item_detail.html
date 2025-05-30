@@ -21,11 +21,10 @@
             数量:
             <input type="number" name="quantity" min="1" max="10" required />
         </label>
-        <br>
+        <br><br></br>
         <button type="submit">カートに入れる</button>
 		<br></br>
-		<td>---------------------------------------------------------------------------------</td>    
-		<br></br>
+	<hr><br></br>
 		<td>
 		    商品詳細紹介：<br>
 		    ■合計5点セット
@@ -59,16 +58,19 @@
 
     </form>
 
-    <p><a href="/items">＜ 商品一覧に戻る</a></p>
+    <p><a href="/items" class="submit_btn">商品一覧に戻る</a></p>
 	
 	
 	<header>
 		<div class="mp_header">
 			<div class="sidebar_btn">三</div>
-			<div class="header_title">マイページ</div>
+			<div class="header_title">ZOOTOWN</div>
 			<div class="linkBox">
 				<a th:href="@{/login}" class="logout-link">ログアウト</a>
 			</div>
+			<div class="linkBox2">
+						<a th:href="@{/cart}" class="logout-link">カート</a>
+					</div>
 		</div>
 	</header>
 
