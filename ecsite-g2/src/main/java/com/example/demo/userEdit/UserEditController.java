@@ -91,8 +91,12 @@ public class UserEditController {
 		}
 		// 更新 SiteUser
 		db.updateUser(su.getID(), "nickName", nickName);
+		System.out.println(phone_number);
 		db.updateUser(su.getID(), "phone_number", phone_number);
 		db.updateUser(su.getID(), "email", email);
+		
+		su = db.getUserById(su.getID());
+		session.setAttribute("su",su);
 
 		// 设定 ID 给 info
 		info.setID(su.getID());
