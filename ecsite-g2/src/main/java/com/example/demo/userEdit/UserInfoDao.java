@@ -23,7 +23,7 @@ public class UserInfoDao {
     // 追加
     public void insert(SiteUserInfo info) {
         String sql = "INSERT INTO SiteUserInfo (ID, gender, creditNumber, birthday, firstName1, lastName1, firstName2, lastName2) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbc.update(sql,
             info.getID(),
             info.getGender(),
