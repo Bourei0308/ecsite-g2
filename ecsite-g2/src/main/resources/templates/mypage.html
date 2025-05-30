@@ -65,7 +65,7 @@
 		  <div th:each="res : ${addressList}">
 		    <!-- 住所が存在する場合のみ表示 -->
 		    <div class="section2">
-		      <div class="info-label">住所1</div>
+		      <div class="info-label">住所<span th:text="${res.addressID}"></span></div>
 		      <div class="info-item">
 		        <div>〒</div>
 		        <div class="info-value" th:text="${res.postNumber}"></div>
