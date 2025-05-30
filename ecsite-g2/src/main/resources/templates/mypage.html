@@ -56,37 +56,46 @@
 	        <div class="info-value" th:text="${(info.lastName2 ?: '') + ' ' + (info.firstName2 ?: '')}"></div>
 	      </div>
 	    </div>
+		
+		
+		<!-- 住所情報 -->
+		<div class="section">
+		  <div class="section-title">住所</div>
 
-	    <!-- 住所情報 -->
-	    <div class="section">
-	      <div class="section-title">住所</div>
-	      <div class="info-item">
-	        <div class="info-label">郵便番号</div>
-	        <div class="info-value" th:text="${info.postNumber}"></div>
-	      </div>
-	      <div class="info-item">
-	        <div class="info-label">住所1</div>
-	        <div class="info-value" th:text="${info.address1}"></div>
-	      </div>
-	      <div class="info-item">
-	        <div class="info-label">住所2</div>
-	        <div class="info-value" th:text="${info.address2}"></div>
-	      </div>
-	      <div class="info-item">
-	        <div class="info-label">住所3</div>
-	        <div class="info-value" th:text="${info.address3}"></div>
-	      </div>
-	      <div class="info-item">
-	        <div class="info-label">住所4</div>
-	        <div class="info-value" th:text="${info.address4}"></div>
-	      </div>
-		  <form th:action="@{/mypage/addAddress}" method="post">
-		  	<button type="submit">新しいお届け先住所を追加する</button>
+		  <div th:each="res : ${addressList}">
+		    <!-- 住所が存在する場合のみ表示 -->
+		    <div class="section2">
+		      <div class="info-label">住所1</div>
+		      <div class="info-item">
+		        <div>〒</div>
+		        <div class="info-value" th:text="${res.postNumber}"></div>
+		      </div>
+
+		      <div class="info-item">
+		        <div class="info-value">
+		          <span th:text="${res.address1}"></span>
+		          <span th:text="${res.address2}"></span>
+		          <span th:text="${res.address3}"></span>
+		          <span th:if="${!#strings.isEmpty(res.address4)}"
+		                th:text="${res.address4}"></span>
+		        </div>
+		      </div>
+
+		      <!-- 住所編集 -->
+		      <form th:action="@{/mypage/editAddress/__${id}__}" method="post">
+		        <button type="submit">住所編集</button>
+		      </form>
+		    </div> <!-- section2 終了 -->
+		  </div> <!-- each 終了 -->
+
+		  <!-- 「新しいお届け先住所を追加する」は常に表示 -->
+		  <form th:action="@{/mypage/addAddress/__${id}__}" method="post">
+		    <button type="submit">新しいお届け先住所を追加する</button>
 		  </form>
-		  <form th:action="@{/mypage/editAddress}" method="post">
-		  	<button type="submit">住所編集</button>
-		  </form>
-	    </div>
+		</div> <!-- section 終了 -->
+
+
+
 
 	    <!-- その他情報 -->
 	    <div class="section">
