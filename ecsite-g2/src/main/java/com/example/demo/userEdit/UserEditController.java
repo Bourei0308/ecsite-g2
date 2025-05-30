@@ -24,7 +24,7 @@ public class UserEditController {
 	private final Dao db;
 	private final AddressDao addressdb;
 
-	public UserEditController(UserInfoDao infodb, Dao db,AddressDao addressdb) {
+	public UserEditController(UserInfoDao infodb, Dao db, AddressDao addressdb) {
 		this.db = db;
 		this.infodb = infodb;
 		this.addressdb = addressdb;
@@ -40,11 +40,16 @@ public class UserEditController {
 		int ID = su.getID();
 		info = (infodb.getById(ID) != null) ? infodb.getById(ID) : new SiteUserInfo();
 
+		List<SiteUserAddress> addressList = addressdb.getByUserId(su.getID());
+
 		model.addAttribute("info", info);
 		model.addAttribute("su", su);
 		session.setAttribute("info", info);
 		session.setAttribute("su", su);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true); // 添加此行
+		model.addAttribute("addressList", addressList);
+		model.addAttribute("id", 1);
+
 		return "mypage";
 	}
 
@@ -53,12 +58,12 @@ public class UserEditController {
 			Model model, SiteUser su, SiteUserInfo info, HttpSession session) {
 		su = (SiteUser) session.getAttribute("su");
 		info = (SiteUserInfo) session.getAttribute("info");
-		
+
 		if (su == null) {
 			return "redirect:/login";
 		}
-		
-		List<SiteUserAddress> addressList=addressdb.getByUserId(su.getID());
+
+		List<SiteUserAddress> addressList = addressdb.getByUserId(su.getID());
 
 		// 放入 model
 		model.addAttribute("su", su);
@@ -96,9 +101,9 @@ public class UserEditController {
 		System.out.println(phone_number);
 		db.updateUser(su.getID(), "phone_number", phone_number);
 		db.updateUser(su.getID(), "email", email);
-		
+
 		su = db.getUserById(su.getID());
-		session.setAttribute("su",su);
+		session.setAttribute("su", su);
 
 		// 设定 ID 给 info
 		info.setID(su.getID());
@@ -112,40 +117,41 @@ public class UserEditController {
 	}
 
 	@RequestMapping("/mypage/addAddress/{addressID}")
-	public String addAddress(Model model,@PathVariable int addressID, 
+	public String addAddress(Model model, @PathVariable int addressID,
 			SiteUser su, SiteUserAddress address, HttpSession session) {
-		
+
 		su = (SiteUser) session.getAttribute("su");
 
 		if (su == null) {
 			return "redirect:/login";
 		}
-		
+
 		address = addressdb.getByAddressIdAndUserId(su.getID(), addressID);
-		
-		if (address==null) {
-			address=new SiteUserAddress();
+
+		if (address == null) {
+			address = new SiteUserAddress();
 		}
-		
+
+		address.setID(su.getID());
 		address.setAddressID(addressID);
 
 		// 放入 model
 		model.addAttribute("su", su);
 		model.addAttribute("address", address);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
-		
+
 		if (address.getPostNumber() != null) {
-		    String postNumberStr = String.format("%07d", address.getPostNumber());
-		    model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
-		    model.addAttribute("postNumber2", postNumberStr.substring(3));
+			String postNumberStr = String.format("%07d", address.getPostNumber());
+			model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
+			model.addAttribute("postNumber2", postNumberStr.substring(3));
 		} else {
-		    model.addAttribute("postNumber1", "");
-		    model.addAttribute("postNumber2", "");
+			model.addAttribute("postNumber1", "");
+			model.addAttribute("postNumber2", "");
 		}
-		
+
 		return "mypage/addAddress";
 	}
-	
+
 	@PostMapping("/mypage/addAddress/{addressID}/insert")
 	public String insertAddress(
 			@RequestParam("postNumber1") String postNumber1,
@@ -159,10 +165,10 @@ public class UserEditController {
 		if (su == null) {
 			return "redirect:/login"; // 未登录跳转登录页
 		}
-		
+
 		System.out.println("PathVariable addressID: " + addressID);
-	    System.out.println("Address before setAddressID: " + address.getAddressID());
-	    
+		System.out.println("Address before setAddressID: " + address.getAddressID());
+
 		// 设定 ID 给 info
 		address.setID(su.getID());
 		address.setAddressID(addressID);
@@ -173,43 +179,41 @@ public class UserEditController {
 
 		return "redirect:/mypage"; // 更新后跳转个人主页
 	}
-	
-	
 
 	@RequestMapping("/mypage/editAddress/{addressID}")
-	public String editAddress(Model model, @PathVariable int addressID, 
-			@ModelAttribute SiteUserAddress address,SiteUser su,  
-			 HttpSession session) {
+	public String editAddress(Model model, @PathVariable int addressID,
+			@ModelAttribute SiteUserAddress address, SiteUser su,
+			HttpSession session) {
 
 		su = (SiteUser) session.getAttribute("su");
 
 		if (su == null) {
 			return "redirect:/login";
 		}
-		
+
 		address = addressdb.getByAddressIdAndUserId(su.getID(), addressID);
 		if (address == null) {
 			return "redirect:/mypage";
 		}
-		
+
 		address.setAddressID(addressID);
 		// 放入 model
 		model.addAttribute("su", su);
 		model.addAttribute("address", address);
 		model.addAttribute("isAdmin", su.getAdminFlag() == true);
-		
+
 		if (address.getPostNumber() != null) {
-		    String postNumberStr = String.format("%07d", address.getPostNumber());
-		    model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
-		    model.addAttribute("postNumber2", postNumberStr.substring(3));
+			String postNumberStr = String.format("%07d", address.getPostNumber());
+			model.addAttribute("postNumber1", postNumberStr.substring(0, 3));
+			model.addAttribute("postNumber2", postNumberStr.substring(3));
 		} else {
-		    model.addAttribute("postNumber1", "");
-		    model.addAttribute("postNumber2", "");
+			model.addAttribute("postNumber1", "");
+			model.addAttribute("postNumber2", "");
 		}
-		
+
 		return "mypage/editAddress";
 	}
-	
+
 	@PostMapping("/mypage/editAddress/{addressID}/update")
 	public String updateAddress(
 			@RequestParam("postNumber1") String postNumber1,
@@ -223,7 +227,9 @@ public class UserEditController {
 		if (su == null) {
 			return "redirect:/login"; // 未登录跳转登录页
 		}
+
 		System.out.println(address.getID());
+
 		// 设定 ID 给 info
 		address.setID(su.getID());
 		address.setAddressID(addressID);
@@ -234,9 +240,4 @@ public class UserEditController {
 
 		return "redirect:/mypage"; // 更新后跳转个人主页
 	}
-	
-	
-	
-	
-	
 }
